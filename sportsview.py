@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from sportshelper import *
+from scoreboard import *
 
 class SportsView(object):
     def setupUi(self, Dialog):
@@ -24,7 +25,9 @@ class SportsView(object):
         self.resultsDump = QtGui.QTextEdit(Dialog)
         self.resultsDump.setGeometry(QtCore.QRect(460,230,441,391))
         self.resultsDump.setObjectName("resultsDump")
-
+    
+        self.score1 = Scoreboard(Dialog)
+        self.score1.setGeometry(QtCore.QRect(460,560,441,391))
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 

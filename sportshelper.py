@@ -8,8 +8,9 @@ class SportsHelper():
     def __init__(self, dialog, form):
         self.dialog = dialog
         self.form = form
-        self.results = self.form.resultsDump
-        
+        self.results = self.form.resultsDump        
+        self.scoreboard = self.form.score1
+
     def showPage(self):
         self.dialog.show()
         self.results.clear()
@@ -25,6 +26,7 @@ class SportsHelper():
         #soup = BeautifulSoup(html)
         #self.results.setText(soup.prettify())
         self.results.setText(html)
+        self.scoreboard.setHomeScore("69")
 
 class FootballScore():
     def __init__(self, date, opp, score, result):
