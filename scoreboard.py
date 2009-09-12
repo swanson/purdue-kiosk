@@ -10,6 +10,7 @@ class Scoreboard(QtGui.QWidget):
 
         self.awayLabel = QtGui.QLabel(self.tr("Away team"))
         self.awayLabel.setObjectName("awayLabel")
+        self.awayLabel.setWordWrap(True)
 
         self.awayScoreLabel = QtGui.QLabel(self.tr("0"))
         self.awayScoreLabel.setObjectName("awayScoreLabel")

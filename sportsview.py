@@ -22,13 +22,19 @@ class SportsView(object):
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName("frame")
 
-        self.resultsDump = QtGui.QTextEdit(Dialog)
-        self.resultsDump.setGeometry(QtCore.QRect(700,290,441,391))
-        self.resultsDump.setObjectName("resultsDump")
-    
         self.score1 = Scoreboard(Dialog)
         self.score1.setGeometry(QtCore.QRect(180,290,self.score1.width(),self.score1.height()))
         self.retranslateUi(Dialog)
+        
+        self.score2 = Scoreboard(Dialog)
+        self.score2.setGeometry(QtCore.QRect(530,290,self.score1.width(),self.score1.height()))
+        self.retranslateUi(Dialog)
+
+        self.score3 = Scoreboard(Dialog)
+        self.score3.setGeometry(QtCore.QRect(880,290,self.score1.width(),self.score1.height()))
+        self.retranslateUi(Dialog)
+
+
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
         self.helper = SportsHelper(Dialog, self)
