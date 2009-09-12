@@ -11,14 +11,41 @@ class SportsHelper():
         self.scoreboard_1 = self.form.score1
         self.scoreboard_2 = self.form.score2
         self.scoreboard_3 = self.form.score3
+        self.leftIndex = 0
+        self.middleIndex = 1
+        self.rightIndex = 2
         self.scorelist = []
 
     def showPage(self):
         self.dialog.show()
-        self.doSearch()
         del self.scorelist
         self.scorelist = []
+        self.doSearch()
+        self.leftIndex = 0
+        self.middleIndex = 1
+        self.rightIndex = 2
 
+    def shiftRight(self):
+        if (self.rightIndex < 11):
+            self.leftIndex += 1
+            self.middleIndex += 1
+            self.rightIndex += 1
+            self.setWidgets()
+
+    def shiftLeft(self):
+        if (self.leftIndex > 0):
+            self.leftIndex -= 1
+            self.middleIndex -= 1
+            self.rightIndex -= 1
+            self.setWidgets()
+        
+
+    def setWidgets(self):
+        self.scorelist[self.leftIndex].setWidget(self.scoreboard_1)
+        self.scorelist[self.middleIndex].setWidget(self.scoreboard_2)
+        self.scorelist[self.rightIndex].setWidget(self.scoreboard_3)
+
+        
     def doSearch(self):
         mech = Browser()
         mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
@@ -55,12 +82,10 @@ class SportsHelper():
                     #print 'Time: %s' % tds[3].string
                     #self.scoreboard.setHeadline(str(tds[3].string))
                     gameScore = FootballScore(str(date.string), str(opp), \
-                        '', '', str(tds[3].string))
+                        '-', '-', str(tds[3].string))
                 #test.setWidget(self.scoreboard)
                 self.scorelist.append(gameScore)
-        self.scorelist[0].setWidget(self.scoreboard_1)
-        self.scorelist[1].setWidget(self.scoreboard_2)
-        self.scorelist[2].setWidget(self.scoreboard_3)
+        self.setWidgets()
 
 class FootballScore():
     def __init__(self, date, opp, homescore, awayscore, headline=''):

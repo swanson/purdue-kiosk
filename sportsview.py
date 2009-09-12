@@ -24,22 +24,37 @@ class SportsView(object):
 
         self.score1 = Scoreboard(Dialog)
         self.score1.setGeometry(QtCore.QRect(180,290,self.score1.width(),self.score1.height()))
-        self.retranslateUi(Dialog)
         
         self.score2 = Scoreboard(Dialog)
         self.score2.setGeometry(QtCore.QRect(530,290,self.score1.width(),self.score1.height()))
-        self.retranslateUi(Dialog)
 
         self.score3 = Scoreboard(Dialog)
         self.score3.setGeometry(QtCore.QRect(880,290,self.score1.width(),self.score1.height()))
+
+        self.backButton = QtGui.QPushButton(Dialog)
+        self.backButton.setGeometry(QtCore.QRect(380,150,128,128))
+        self.backButton.setIconSize(QtCore.QSize(240,240))
+        self.backButton.setObjectName("backButton")
+
+        self.forward = QtGui.QPushButton(Dialog)
+        self.forward.setGeometry(QtCore.QRect(950, 150, 128, 128))
+        self.forward.setIconSize(QtCore.QSize(240, 240))
+        self.forward.setObjectName("forward")
+
         self.retranslateUi(Dialog)
-
-
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
+        
         self.helper = SportsHelper(Dialog, self)
+
+        self.backButton.connect(self.backButton, QtCore.SIGNAL("clicked()"), \
+            self.helper.shiftLeft)
+        self.forward.connect(self.forward, QtCore.SIGNAL("clicked()"), \
+            self.helper.shiftRight)
+
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
-
+        self.backButton.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/back_arrow.png);\n" "border-radius: 1px;", None, QtGui.QApplication.UnicodeUTF8))
+        self.forward.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/forward_arrow.png);\n" "border-radius: 1px;", None, QtGui.QApplication.UnicodeUTF8))
+       
