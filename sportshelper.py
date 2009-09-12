@@ -39,13 +39,11 @@ class SportsHelper():
             self.rightIndex -= 1
             self.setWidgets()
         
-
     def setWidgets(self):
         self.scorelist[self.leftIndex].setWidget(self.scoreboard_1)
         self.scorelist[self.middleIndex].setWidget(self.scoreboard_2)
         self.scorelist[self.rightIndex].setWidget(self.scoreboard_3)
 
-        
     def doSearch(self):
         mech = Browser()
         mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
@@ -60,9 +58,8 @@ class SportsHelper():
          #todo - make list of all parsed results, stick the first one into the scoreboard
         for line in table.findAll('tr'):
             if (i==0):
-                i+=1 #ghetto skipping
+                i=1 #ghetto skip table headings
             else:
-                i+=1
                 date=line.find('font')
                 #print 'Date: %s' % date.string
                 #self.scoreboard.setDate(str(date.string))
@@ -75,8 +72,10 @@ class SportsHelper():
                     scores=links[1].string.split('-')
                     #self.scoreboard.setHomeScore(str(scores[0]))
                     #self.scoreboard.setAwayScore(str(scores[1]))
+                    tds=line.findAll('td')
+                    hl='Record: %s' % str(tds[3].string)
                     gameScore = FootballScore(str(date.string), str(opp), \
-                        str(scores[0]), str(scores[1]))
+                        str(scores[0]), str(scores[1]), str(hl))
                 else:
                     tds=line.findAll('td')
                     #print 'Time: %s' % tds[3].string
