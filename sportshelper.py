@@ -55,34 +55,37 @@ class SportsHelper():
         schedule = soup.find('font')
         table = schedule.find('table')
         i=0
-         #todo - make list of all parsed results, stick the first one into the scoreboard
         for line in table.findAll('tr'):
             if (i==0):
                 i=1 #ghetto skip table headings
             else:
                 date=line.find('font')
-                #print 'Date: %s' % date.string
-                #self.scoreboard.setDate(str(date.string))
                 links=line.findAll('a')
-                #print 'Oppt: %s' % links[0].string
-                #self.scoreboard.setAwayTeam(str(links[0].string))
-                opp = links[0].string
+                opp = links[0].string #todo - swap spaces for newline, shrink long names
                 if (len(links) > 1):
-                    #print 'Score: %s' % links[1].string
                     scores=links[1].string.split('-')
-                    #self.scoreboard.setHomeScore(str(scores[0]))
-                    #self.scoreboard.setAwayScore(str(scores[1]))
                     tds=line.findAll('td')
                     hl='Record: %s' % str(tds[3].string)
-                    gameScore = FootballScore(str(date.string), str(opp), \
-                        str(scores[0]), str(scores[1]), str(hl))
+                    divs=line.findAll('td')
+                    res=divs[2].find('font')
+                    wl=res.contents[0].string[0]
+                    if (scores[0] > scores[1]):
+                        hs = scores[0]
+                        ls = scores[1]
+                    else:
+                        hs = scores[1]
+                        ls = scores[0]
+                    if (wl == "W"):
+                        gameScore = FootballScore(str(date.string), str(opp), \
+                            str(hs), str(ls), str(hl))
+                    else:
+                        gameScore = FootballScore(str(date.string), str(opp), \
+                            str(ls), str(hs), str(hl))
+
                 else:
                     tds=line.findAll('td')
-                    #print 'Time: %s' % tds[3].string
-                    #self.scoreboard.setHeadline(str(tds[3].string))
                     gameScore = FootballScore(str(date.string), str(opp), \
                         '-', '-', str(tds[3].string))
-                #test.setWidget(self.scoreboard)
                 self.scorelist.append(gameScore)
         self.setWidgets()
 

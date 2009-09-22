@@ -11,7 +11,7 @@ from PyQt4 import QtCore, QtGui
 from directory import *
 import os
 
-class DirectoryWindow(object):
+class DirectoryVieww(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1378,930).size()).expandedTo(Dialog.minimumSizeHint()))

@@ -1,16 +1,15 @@
 import sys
 from PyQt4 import QtGui
-from gui_test import *
-from directory import *
-from directorywindow import *
+from welcomeview import *
+from directoryview import *
 from sportsview import *
 
 app = QtGui.QApplication(sys.argv)
 window = QtGui.QMainWindow()
 dialog = QtGui.QDialog()
-ui = Ui_MainWindow()
+ui = WelcomeView()
 ui.setupUi(window)
-directoryWindow = DirectoryWindow()
+directoryWindow = DirectoryVieww()
 directoryWindow.setupUi(dialog)
 sportsWindow = SportsView()
 sportsWindow.setupUi(QtGui.QDialog())

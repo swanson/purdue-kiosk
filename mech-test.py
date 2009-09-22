@@ -17,6 +17,14 @@ for line in table.findAll('tr'):
     if (i==0):
         i=1 #ghetto skip heading
     else:
+        test=line.findAll('td')
+        test2= test[2].find('font')
+        vic = ""+test2.contents[0].string
+        print vic
+        if (vic[0] == u'W'):
+            print "Win!"
+        else:
+            print "Lost!"
         date=line.find('font')
         print 'Date: %s' % date.string
         links=line.findAll('a')

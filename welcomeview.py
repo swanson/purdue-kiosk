@@ -10,7 +10,7 @@
 from PyQt4 import QtCore, QtGui
 import os
 
-class Ui_MainWindow(object):
+class WelcomeView(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,1367,978).size()).expandedTo(MainWindow.minimumSizeHint()))
