@@ -10,12 +10,14 @@
 from PyQt4 import QtCore, QtGui
 from newshelper import *
 import os
+from flickcharm import *
 
 class NewsView(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1378,930).size()).expandedTo(Dialog.minimumSizeHint()))
 
+        
         self.frame = QtGui.QFrame(Dialog)
         self.frame.setGeometry(QtCore.QRect(0,0,1381,931))
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
@@ -29,6 +31,11 @@ class NewsView(object):
         self.resultsField = QtGui.QTextEdit(Dialog)
         self.resultsField.setGeometry(QtCore.QRect(570,250,600,600))
         self.resultsField.setObjectName("resultsField")
+
+        self.charm = FlickCharm()
+        #self.charm.activateOn(self.frame)
+        self.charm.activateOn(self.resultsField)
+        
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

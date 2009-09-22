@@ -19,7 +19,7 @@ class NewsHelper():
         mech = Browser()
         mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
         mech.set_handle_robots(False)
-        url = "http://www.purdue.edu/newsroom/"
+        url = "http://feeds.feedburner.com/PurdueEngNews?format=xml"
         page = mech.open(url)
         html = page.read()
         soup = BeautifulSoup(html)
