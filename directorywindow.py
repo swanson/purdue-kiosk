@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from directory import *
+import os
 
 class DirectoryWindow(object):
     def setupUi(self, Dialog):
@@ -53,9 +54,10 @@ class DirectoryWindow(object):
 
 
     def retranslateUi(self, Dialog):
+        path = os.getcwd()
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Directory Search", None, QtGui.QApplication.UnicodeUTF8))
         Dialog.setStyleSheet(QtGui.QApplication.translate("Dialog", "bg=red", None, QtGui.QApplication.UnicodeUTF8))
-        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
+        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("Dialog", "First Name", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("Dialog", "Last Name", None, QtGui.QApplication.UnicodeUTF8))
         self.searchButton.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white", None, QtGui.QApplication.UnicodeUTF8))

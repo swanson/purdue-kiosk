@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+import os
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -65,20 +66,20 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        path = os.getcwd()
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
-        self.widget.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/mockup_blank_template.png)\n"
-        "", None, QtGui.QApplication.UnicodeUTF8))
-        self.directoryButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/directory.png);\n"
+        self.widget.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/mockup_blank_template.png);\n", None, QtGui.QApplication.UnicodeUTF8))
+        self.directoryButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/directory.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.mailButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/mail.png);\n"
+        self.mailButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/mail.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.printButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/printer.png);\n"
+        self.printButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/printer.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.newsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/news.png);\n"
+        self.newsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/news.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.mapButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/map.png);\n"
+        self.mapButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/map.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.sportsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/sports.png);\n"
+        self.sportsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/sports.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.welcomeText.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(/home/matt/welcome.png);", None, QtGui.QApplication.UnicodeUTF8))
+        self.welcomeText.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/welcome.png);", None, QtGui.QApplication.UnicodeUTF8))
 

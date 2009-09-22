@@ -1,4 +1,5 @@
 from PyQt4 import QtGui, QtCore
+import os
 
 class Scoreboard(QtGui.QWidget):
     def __init__(self, parent = None):
@@ -23,8 +24,9 @@ class Scoreboard(QtGui.QWidget):
 
         self.headlineLabel = QtGui.QLabel(self.tr("test"))
         self.headlineLabel.setObjectName("headlineLabel")
-
-        self.widget.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(/home/matt/score.png);", None, QtGui.QApplication.UnicodeUTF8))
+    
+        self.path = os.getcwd()
+        self.widget.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(" + self.path + "/images/score.png);", None, QtGui.QApplication.UnicodeUTF8))
         
         self.homeScoreLabel.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(null);", None, QtGui.QApplication.UnicodeUTF8))
         self.setHomeScore('q')        

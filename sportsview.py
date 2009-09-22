@@ -10,6 +10,7 @@
 from PyQt4 import QtCore, QtGui
 from sportshelper import *
 from scoreboard import *
+import os
 
 class SportsView(object):
     def setupUi(self, Dialog):
@@ -21,7 +22,7 @@ class SportsView(object):
         self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName("frame")
-
+        
         self.score1 = Scoreboard(Dialog)
         self.score1.setGeometry(QtCore.QRect(180,290,self.score1.width(),self.score1.height()))
         
@@ -53,8 +54,9 @@ class SportsView(object):
 
 
     def retranslateUi(self, Dialog):
+        path = os.getcwd()
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
-        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
-        self.backButton.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/back_arrow.png);\n" "border-radius: 1px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.forward.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(/home/matt/forward_arrow.png);\n" "border-radius: 1px;", None, QtGui.QApplication.UnicodeUTF8))
+        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
+        self.backButton.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/back_arrow.png);\n" "border-radius: 1px;", None, QtGui.QApplication.UnicodeUTF8))
+        self.forward.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/forward_arrow.png);\n" "border-radius: 1px;", None, QtGui.QApplication.UnicodeUTF8))
        
