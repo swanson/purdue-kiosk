@@ -1,15 +1,20 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from random import randint
+from flickcharm import *
+
 
 class CustomListBox(QListView):
     def __init__(self, parent=None):
         QListView.__init__(self, parent)
         self.buildModel()
         self.setModel(self.model)
+        self.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         #bind event for clicking a row (FML)
         self.connect(self, SIGNAL("clicked(QModelIndex)"), \
             self.clickHandler)
+        self.flick = FlickCharm()
+        self.flick.activateOn(self)
 
     def buildModel(self):
         self.model = QStandardItemModel()
@@ -19,8 +24,8 @@ class CustomListBox(QListView):
         grad.setColorAt(0, QColor('gray'))
         grad.setColorAt(1, QColor('black'))
 
-        for n in range(25):                   
-            item = QStandardItem('Item %s' % randint(1, 100))
+        for n in range(100):                   
+            item = QStandardItem('Item %s' % n)
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
             item.setSizeHint(QSize(200,50))
