@@ -11,6 +11,7 @@ from PyQt4 import QtCore, QtGui
 from newshelper import *
 import os
 from flickcharm import *
+from CustomListBox import *
 
 class NewsView(object):
     def setupUi(self, Dialog):
@@ -29,13 +30,18 @@ class NewsView(object):
         self.searchButton.setObjectName("searchButton")
 
         self.resultsField = QtGui.QTextEdit(Dialog)
-        self.resultsField.setGeometry(QtCore.QRect(570,250,600,600))
+        self.resultsField.setGeometry(QtCore.QRect(775,275,475,500))
         self.resultsField.setObjectName("resultsField")
 
         self.charm = FlickCharm()
         #self.charm.activateOn(self.frame)
         self.charm.activateOn(self.resultsField)
         
+        self.topicListBox = CustomListBox(Dialog)
+        self.topicListBox.setGeometry(QtCore.QRect(225,275,200,500))
+
+        self.headlineListBox = CustomListBox(Dialog)
+        self.headlineListBox.setGeometry(QtCore.QRect(450,275,300,500))
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
