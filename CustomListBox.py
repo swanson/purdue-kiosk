@@ -11,8 +11,8 @@ class CustomListBox(QListView):
         self.setModel(self.model)
         self.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         #bind event for clicking a row (FML)
-        self.connect(self, SIGNAL("clicked(QModelIndex)"), \
-            self.clickHandler)
+        #self.connect(self, SIGNAL("clicked(QModelIndex)"), \
+        #    self.clickHandler)
         self.flick = FlickCharm()
         self.flick.activateOn(self)
 
@@ -36,6 +36,11 @@ class CustomListBox(QListView):
 
     def clickHandler(self, event):
         print "You clicked item %i" % event.row()
+
+    def updateModel(self, newModel):
+        self.model = newModel
+        self.setModel(newModel)
+        self.update()
 
 if __name__ == "__main__":
     import sys

@@ -25,10 +25,6 @@ class NewsView(object):
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName("frame")
 
-        self.searchButton = QtGui.QPushButton(Dialog)
-        self.searchButton.setGeometry(QtCore.QRect(420,320,80,28))
-        self.searchButton.setObjectName("searchButton")
-
         self.resultsField = QtGui.QTextEdit(Dialog)
         self.resultsField.setGeometry(QtCore.QRect(775,275,475,500))
         self.resultsField.setObjectName("resultsField")
@@ -47,7 +43,8 @@ class NewsView(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
         self.helper = NewsHelper(Dialog, self)
-        self.searchButton.connect(self.searchButton, QtCore.SIGNAL("clicked()"), self.helper.doSearch)
+        self.topicListBox.connect(self.topicListBox, SIGNAL("clicked(QModelIndex)"), \
+                                    self.helper.populateHeadlineList)
 
 
     def retranslateUi(self, Dialog):
@@ -55,7 +52,5 @@ class NewsView(object):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Campus News", None, QtGui.QApplication.UnicodeUTF8))
         Dialog.setStyleSheet(QtGui.QApplication.translate("Dialog", "", None, QtGui.QApplication.UnicodeUTF8))
         self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
-        self.searchButton.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white", None, QtGui.QApplication.UnicodeUTF8))
-        self.searchButton.setText(QtGui.QApplication.translate("Dialog", "Search", None, QtGui.QApplication.UnicodeUTF8))
-        self.resultsField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white", None, QtGui.QApplication.UnicodeUTF8))
+        #self.resultsField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white", None, QtGui.QApplication.UnicodeUTF8))
 
