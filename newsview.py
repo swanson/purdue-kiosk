@@ -25,7 +25,7 @@ class NewsView(object):
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName("frame")
 
-        self.resultsField = QtGui.QTextEdit(Dialog)
+        self.resultsField = QtGui.QTextBrowser(Dialog)
         self.resultsField.setGeometry(QtCore.QRect(775,275,475,500))
         self.resultsField.setObjectName("resultsField")
 
@@ -45,6 +45,8 @@ class NewsView(object):
         self.helper = NewsHelper(Dialog, self)
         self.topicListBox.connect(self.topicListBox, SIGNAL("clicked(QModelIndex)"), \
                                     self.helper.populateHeadlineList)
+        self.headlineListBox.connect(self.headlineListBox, SIGNAL("clicked(QModelIndex)"), \
+                                        self.helper.displayStory)
 
 
     def retranslateUi(self, Dialog):
