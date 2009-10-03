@@ -26,7 +26,7 @@ class NewsHelper():
         
     def showPage(self):
         self.dialog.show()
-        self.results.clear()
+        #self.results.clear()
         self.parseFeeds()
         self.initializeNews()
         
@@ -59,7 +59,7 @@ class NewsHelper():
                 i+=1
             for story in self.newsList:
                 headlines.append(story.title)
-                descriptions.append(story.desc)
+                descriptions.append(story.link)
                 #story.display()
             self.headlineList.append(headlines)
             self.descList.append(descriptions)
@@ -103,8 +103,8 @@ class NewsHelper():
             item.setEditable(False)
             model.appendRow(item)
         self.headlineListBox.updateModel(model)
-        self.results.setText('%s' % self.descList[0][0])
-
+        #self.results.setText('%s' % self.descList[0][0])
+        self.results.setUrl(QUrl('%s' % self.descList[0][0]))
 
 
     def populateTopicList(self):
@@ -133,9 +133,10 @@ class NewsHelper():
             index2 = index2[0].row()
         else:
             index2 = 0
-        self.results.clear()
+        #self.results.clear()
         #print self.descList[index][index2]
-        self.results.setText('%s' % self.descList[index2][index])
+        #self.results.setText('%s' % self.descList[index2][index])
+        self.results.setUrl(QUrl('%s' % self.descList[index2][index]))
 
 class NewsStory():
     def __init__(self, date, title, link, desc):

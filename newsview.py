@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtWebKit import *
 from newshelper import *
 import os
 from flickcharm import *
@@ -25,8 +26,9 @@ class NewsView(object):
         self.frame.setFrameShadow(QtGui.QFrame.Raised)
         self.frame.setObjectName("frame")
 
-        self.resultsField = QtGui.QTextBrowser(Dialog)
-        self.resultsField.setGeometry(QtCore.QRect(775,275,475,500))
+        self.resultsField = QWebView(Dialog)
+        self.resultsField.setGeometry(QtCore.QRect(725,125,550,700))
+        self.resultsField.setTextSizeMultiplier(3)
         self.resultsField.setObjectName("resultsField")
 
         self.charm = FlickCharm()
@@ -34,10 +36,10 @@ class NewsView(object):
         self.charm.activateOn(self.resultsField)
         
         self.topicListBox = CustomListBox(Dialog)
-        self.topicListBox.setGeometry(QtCore.QRect(225,275,200,500))
+        self.topicListBox.setGeometry(QtCore.QRect(175,275,200,500))
 
         self.headlineListBox = CustomListBox(Dialog)
-        self.headlineListBox.setGeometry(QtCore.QRect(450,275,300,500))
+        self.headlineListBox.setGeometry(QtCore.QRect(400,275,300,500))
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
