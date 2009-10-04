@@ -12,6 +12,7 @@ class EmailHelper():
         self.messageDisplay = form.messageDisplay
         self.userNameField = form.userNameField
         self.passwordField = form.passwordField
+        self.progressBar = form.progressBar
         self.subjectList = []
         self.bodyList = []
         
@@ -21,8 +22,11 @@ class EmailHelper():
         #self.populateSubjectList()
 
     def checkEmail(self):
+        self.progressBar.setVisible(True)
+        self.progressBar.setValue(1)
         self.loadMessages()
         self.populateSubjectList()
+        self.progressBar.setVisible(False)
 
     def populateSubjectList(self):
         model = QStandardItemModel()
@@ -58,10 +62,11 @@ class EmailHelper():
         mailserver.pass_(password)
         numMessages = len(mailserver.list()[1])
         z=0
+        messageLimit = 15
         for i in reversed(range(numMessages)):
             message = ""
             z += 1
-            if (z > 10):
+            if (z > messageLimit):
                 break
             msg = mailserver.retr(i+1)
             str = string.join(msg[1], "\n")
@@ -77,10 +82,13 @@ class EmailHelper():
                     if part.get_content_type() == 'text/plain':
                         message += "<br>" + part.get_payload().replace("\n", "<br>") \
                                      + "<br>"
+                        break
                     if part.get_content_type() == 'text/html':
                         message += "<br>" + part.get_payload().replace("\n", "<br>") \
                                      + "<br>"
+                        break
             else:
                 message += "<br>" + mail.get_payload().replace("\n", "<br>") + "<br>"
             
             self.bodyList.append(message)
+            self.progressBar.setValue(float(z) / float(messageLimit) * 100)

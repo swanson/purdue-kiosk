@@ -37,6 +37,10 @@ class EmailView(object):
         self.checkEmailButton.setGeometry(QRect(450, 200, 100, 50))
         self.checkEmailButton.setText("Check email")
 
+        self.progressBar = QProgressBar(Dialog)
+        self.progressBar.setGeometry(QRect(600, 200, 300, 50))
+        self.progressBar.setVisible(False)        
+
         self.subjectListBox = CustomListBox(Dialog)
         self.subjectListBox.setGeometry(QtCore.QRect(175,275,400,500))
 
