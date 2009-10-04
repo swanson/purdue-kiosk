@@ -25,7 +25,7 @@ class CustomListBox(QListView):
         grad.setColorAt(1, QColor('black'))
 
         for n in range(100):                   
-            item = QStandardItem('Item %s' % n)
+            item = QStandardItem("")
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
             item.setSizeHint(QSize(200,50))
