@@ -82,4 +82,3 @@ class WelcomeView(object):
         self.sportsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/sports.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
         self.welcomeText.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/welcome.png);", None, QtGui.QApplication.UnicodeUTF8))
-

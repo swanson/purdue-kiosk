@@ -9,6 +9,8 @@ class NewsHelper():
     def __init__(self, dialog, form):
         self.dialog = dialog
         self.form = form
+        self.progressBar = form.progressBar
+        self.loadingLabel = form.loadingLabel
         self.topicListBox = form.topicListBox
         self.headlineListBox = form.headlineListBox
         self.results = self.form.resultsField
@@ -25,11 +27,31 @@ class NewsHelper():
         
         
     def showPage(self):
+        self.hideContent()
         self.dialog.show()
         #self.results.clear()
-        self.parseFeeds()
-        self.initializeNews()
+        self.thread = ThreadedNewsParser(self.newsList, \
+                                         self.headlineList, \
+                                         self.descList)
+        self.dialog.connect(self.thread, SIGNAL("done()"), self.populateTopicList)
+        self.dialog.connect(self.thread, SIGNAL("show()"), self.showContent)
+        #self.parseFeeds()
+        #self.initializeNews()
         
+    def showContent(self):
+        self.progressBar.setVisible(False)
+        self.loadingLabel.setVisible(False)
+        self.topicListBox.setVisible(True)
+        self.headlineListBox.setVisible(True)
+        self.results.setVisible(True)
+
+    def hideContent(self):
+        self.progressBar.setVisible(True)
+        self.loadingLabel.setVisible(True)
+        self.topicListBox.setVisible(False)
+        self.headlineListBox.setVisible(False)
+        self.results.setVisible(False)        
+    
     def parseFeeds(self):
         mech = Browser()
         mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
@@ -125,6 +147,7 @@ class NewsHelper():
             item.setEditable(False)
             model.appendRow(item)
         self.topicListBox.updateModel(model)
+        self.initializeNews()
  
     def displayStory(self, index):
         index=index.row()
@@ -148,4 +171,59 @@ class NewsStory():
     def display(self):
         print self.title
         print
+
+class ThreadedNewsParser(QThread):
+    def __init__(self, nl, hl, dl, parent = None):
+        QThread.__init__(self, parent)
+        self.exiting = False
+        self.newsList = nl
+        self.headlineList = hl
+        self.descList = dl
+        self.feedUrls = ['http://feeds.feedburner.com/PurdueStudentNews?format=xml', \
+                        'http://feeds.feedburner.com/PurdueEngNews?format=xml', \
+                        'http://feeds.feedburner.com/PurdueResearchNews?format=xml', \
+                        'http://feeds.feedburner.com/PurdueBusinessNews?format=xml', \
+                        'http://feeds.feedburner.com/PurdueEventNews?format=xml']
+        self.start()
+
+    def run(self):
+        self.parseFeeds()
+
+    def parseFeeds(self):
+        mech = Browser()
+        mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
+        mech.set_handle_robots(False)
+        for url in self.feedUrls:
+        #url = "http://feeds.feedburner.com/PurdueEngNews?format=xml"
+            page = mech.open(url)
+            html = page.read()
+            soup = BeautifulStoneSoup(html)
+            headlines = []
+            descriptions = []
+            i=0
+            self.newsList = []
+            for item in soup.findAll('item'):
+                if (i > 20):
+                    break
+                date = item.find('pubdate')
+                title = item.find('title')
+                link = item.find('link')
+                desc = item.find('description')
+                if (len(title.contents) > 0):
+                    title2 = title.contents[0]
+                else:
+                    title2 = 'None'
+                self.newsList.append(NewsStory(date.contents[0], title2, link.contents[0], \
+                    desc.contents[0]))
+                i+=1
+            for story in self.newsList:
+                headlines.append(story.title)
+                descriptions.append(story.link)
+                #story.display()
+            self.headlineList.append(headlines)
+            self.descList.append(descriptions)
+        #self.populateTopicList()     
+        self.emit(SIGNAL("done()"))  
+        self.emit(SIGNAL("show()")) 
+
 

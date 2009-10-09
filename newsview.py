@@ -27,14 +27,27 @@ class NewsView(object):
         self.frame.setObjectName("frame")
 
         self.resultsField = QWebView(Dialog)
-        self.resultsField.setGeometry(QtCore.QRect(725,125,550,700))
-        self.resultsField.setTextSizeMultiplier(3)
+        self.resultsField.setGeometry(QtCore.QRect(725,125,560,700))
+        self.resultsField.setTextSizeMultiplier(2)
         self.resultsField.setObjectName("resultsField")
+        #self.resultsField.settings().setAttribute(QWebSettings.JavascriptEnabled, False)
 
         self.charm = FlickCharm()
         #self.charm.activateOn(self.frame)
         self.charm.activateOn(self.resultsField)
-        
+ 
+        self.progressBar = QProgressBar(Dialog)
+        self.progressBar.setGeometry(QRect(450, 450, 600, 100))
+        self.progressBar.setVisible(False) 
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(0)
+        self.progressBar.setValue(1)
+
+        self.loadingLabel = QLabel(Dialog)
+        self.loadingLabel.setGeometry(QRect(450, 350, 600, 100))
+        self.loadingLabel.setText("Loading news feeds...") 
+        self.loadingLabel.setAlignment(Qt.AlignCenter)
+       
         self.topicListBox = CustomListBox(Dialog)
         self.topicListBox.setGeometry(QtCore.QRect(175,275,200,500))
 
@@ -56,5 +69,6 @@ class NewsView(object):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Campus News", None, QtGui.QApplication.UnicodeUTF8))
         Dialog.setStyleSheet(QtGui.QApplication.translate("Dialog", "", None, QtGui.QApplication.UnicodeUTF8))
         self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
-        #self.resultsField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white", None, QtGui.QApplication.UnicodeUTF8))
+        self.loadingLabel.setStyleSheet(QtGui.QApplication.translate("MainWindow", "font-size: 50px;", None, QtGui.QApplication.UnicodeUTF8)) 
+
 

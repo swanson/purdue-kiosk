@@ -46,6 +46,7 @@ class EmailView(object):
 
         self.messageDisplay = QWebView(Dialog)
         self.messageDisplay.setGeometry(QtCore.QRect(600, 275, 600, 500))
+        self.messageDisplay.setVisible(False)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
