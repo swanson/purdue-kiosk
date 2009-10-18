@@ -10,6 +10,9 @@ class CustomListBox(QListView):
         self.buildModel()
         self.setModel(self.model)
         self.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.viewport().setAutoFillBackground(False)
+        self.setFrameShape(QFrame.NoFrame)
+        self.setFrameShadow(QFrame.Plain)
         #bind event for clicking a row (FML)
         #self.connect(self, SIGNAL("clicked(QModelIndex)"), \
         #    self.clickHandler)
@@ -18,13 +21,13 @@ class CustomListBox(QListView):
 
     def buildModel(self):
         self.model = QStandardItemModel()
-        
+
         #generate background gradient
         grad = QLinearGradient(0,0,0,75)
         grad.setColorAt(0, QColor('gray'))
         grad.setColorAt(1, QColor('black'))
 
-        for n in range(100):                   
+        for n in range(100):
             item = QStandardItem("")
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
