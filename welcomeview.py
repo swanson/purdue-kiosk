@@ -32,10 +32,10 @@ class WelcomeView(object):
         self.mailButton.setIconSize(QtCore.QSize(240,240))
         self.mailButton.setObjectName("mailButton")
 
-        self.printButton = QtGui.QPushButton(self.widget)
-        self.printButton.setGeometry(QtCore.QRect(930,220,280,280))
-        self.printButton.setIconSize(QtCore.QSize(240,240))
-        self.printButton.setObjectName("printButton")
+        self.labButton = QtGui.QPushButton(self.widget)
+        self.labButton.setGeometry(QtCore.QRect(930,220,280,280))
+        self.labButton.setIconSize(QtCore.QSize(240,240))
+        self.labButton.setObjectName("labButton")
 
         self.newsButton = QtGui.QPushButton(self.widget)
         self.newsButton.setGeometry(QtCore.QRect(930,540,280,280))
@@ -73,7 +73,7 @@ class WelcomeView(object):
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
         self.mailButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/mail.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.printButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/printer.png);\n"
+        self.labButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/printer.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
         self.newsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/news.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))

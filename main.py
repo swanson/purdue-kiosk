@@ -6,6 +6,7 @@ from sportsview import *
 from newsview import *
 from emailview import *
 from mapview import *
+from labview import *
 
 app = QtGui.QApplication(sys.argv)
 window = QtGui.QMainWindow()
@@ -22,17 +23,15 @@ emailView = EmailView()
 emailView.setupUi(QtGui.QDialog())
 mapView = MapView()
 mapView.setupUi(QtGui.QDialog())
-
+labView = LabView()
+labView.setupUi(QtGui.QDialog())
 
 ui.directoryButton.connect(ui.directoryButton, QtCore.SIGNAL("clicked()"), directoryView.helper.showPage)
 ui.sportsButton.connect(ui.sportsButton, QtCore.SIGNAL("clicked()"), sportsView.helper.showPage)
 ui.newsButton.connect(ui.newsButton, QtCore.SIGNAL("clicked()"), newsView.helper.showPage)
 ui.mailButton.connect(ui.mailButton, QtCore.SIGNAL("clicked()"), emailView.helper.showPage)
 ui.mapButton.connect(ui.mapButton, QtCore.SIGNAL("clicked()"), mapView.helper.showPage)
-
+ui.labButton.connect(ui.labButton, QtCore.SIGNAL("clicked()"), labView.helper.showPage)
 
 window.show()
 sys.exit(app.exec_())
-
-
-
