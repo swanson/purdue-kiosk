@@ -10,10 +10,7 @@ class LabHelper():
     def __init__(self, dialog, form):
         self.dialog = dialog
         self.form = form
-        self.listing = form.listing
-        self.xpLabs = []
-        self.macLabs = []
-        self.sunLabs = []
+        self.listing = self.form.listing
 
     def showPage(self):
         self.dialog.show()
@@ -23,19 +20,53 @@ class LabHelper():
         self.listing.setOs("Windows XP")
         self.listing.setVisible(True)
         self.parse()
+        self.dumpResults(self.xp)
 
     def setMac(self):
         self.listing.setOs("Macintosh")
         self.listing.setVisible(True)
         self.parse()
+        self.dumpResults(self.mac)
 
     def setSun(self):
         self.listing.setOs("Sun Solaris")
         self.listing.setVisible(True)
         self.parse()
+        self.dumpResults(self.sun)
+
+    def dumpResults(self, list):
+        #self.listing.setLabs(list[1].display())
+        str = ""
+        i = 0
+        for lab in list:
+            if (i == 0):
+                i = 1
+                continue
+            str += lab.display() + "<br>"
+        self.listing.setLabs(str)
 
     def parse(self):
-        print "hey"
+        url = "https://tomcat.itap.purdue.edu:8445/ICSWeb/AvailableStations"
+        page = urllib.urlopen(url)
+        soup = BeautifulSoup(page.read())
+        i=0
+        j=0
+        self.xp = []
+        self.mac = []
+        self.sun = []
+        self.labs = [self.xp, self.mac, self.sun]
+        for tbl in soup.findAll('table'):
+            if (i==0):
+                i=1
+                continue	
+            for tr in tbl.findAll('tr'):
+                if (len(tr.contents) > 2):
+                    a = ComputerLab(None, None, None)
+                    a.room = tr.contents[0].find('font').contents[0]
+                    a.num = tr.contents[1].find('font').contents[0]
+                    a.time = tr.contents[2].find('font').contents[0]
+                    self.labs[j].append(a)
+        j+=1
 
 class ComputerLab():
     def __init__(self, room, num, time):
@@ -43,7 +74,7 @@ class ComputerLab():
         self.num = num
         self.time = time
 
-    def __repr__(self):
-        tab="&nbsp;&nbsp;&nbsp;&nbsp;"
-        return "%s %s %s %s %s" % (self.room, tab, self.num, tab, self.time)
-
+    def display(self):
+        tab = "&nbsp;&nbsp;&nbsp;&nbsp;"
+        str = "%s %s %s %s %s" % (self.room, tab, self.num, tab, self.time)
+        return str

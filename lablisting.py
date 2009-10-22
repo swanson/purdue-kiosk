@@ -26,7 +26,7 @@ class LabListing(QWidget):
         self.labLabel.setFrameShape(QTextEdit.NoFrame)
         self.labLabel.setFrameShadow(QTextEdit.Plain)
         self.setLabs("123 Main Str<br>Anytown, USA 13432")
-        self.labLabel.setGeometry(QRect(220,310,400,150))
+        self.labLabel.setGeometry(QRect(100,200,400,150))
         self.labLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
 
         layout = QGridLayout(self)
