@@ -21,7 +21,10 @@ class MapHelper():
                     SIGNAL("loadFinished(bool)"), self.showContent)
 
     def showContent(self, a):
-        js="document.getElementById('overlays').Buildings.click();"
+        js=" if (document.getElementById('overlays').Buildings.checked) \
+             { \
+	            document.getElementById('overlays').Buildings.click(); \
+             }"
         self.results.page().mainFrame().evaluateJavaScript(js)
         centerMapJs="window.scrollTo(0,100);"
         self.results.page().mainFrame().evaluateJavaScript(centerMapJs)

@@ -10,7 +10,6 @@ class DirectoryHelper():
         self.dialog = dialog
         self.form = form
         sb = self.form.searchButton
-        #sb.connect(sb, QtCore.SIGNAL("clicked()"), self.doSearch)
         self.resultListBox = self.form.results
         self.fn = self.form.fnField
         self.ln = self.form.lnField
@@ -48,6 +47,8 @@ class DirectoryHelper():
     def doSearch(self):
         del self.resultsList
         self.resultsList = []
+        self.listing.setVisible(False)
+        self.resultListBox.setVisible(False)
         self.thread = ThreadedDirectoryParser(self.fn.text(), \
                                     self.ln.text(), self.resultsList)
         self.dialog.connect(self.thread, SIGNAL("done()"), \
