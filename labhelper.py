@@ -3,6 +3,8 @@ from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import urllib
+
 
 class LabHelper():
     def __init__(self, dialog, form):
@@ -33,4 +35,15 @@ class LabHelper():
         self.parse()
 
     def parse(self):
-        print "sup"
+        print "hey"
+
+class ComputerLab():
+    def __init__(self, room, num, time):
+        self.room = room
+        self.num = num
+        self.time = time
+
+    def __repr__(self):
+        tab="&nbsp;&nbsp;&nbsp;&nbsp;"
+        return "%s %s %s %s %s" % (self.room, tab, self.num, tab, self.time)
+
