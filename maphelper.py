@@ -3,7 +3,6 @@ from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from pymaps import Map, PyMap
 
 class MapHelper():
     def __init__(self, dialog, form):
