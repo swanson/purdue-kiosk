@@ -12,6 +12,10 @@ class LabListing(QWidget):
         self.path = os.getcwd()
         self.widget.setStyleSheet(QApplication.translate("Form", "background-image: url(" + self.path + "/images/blank_lab.png);", None, QApplication.UnicodeUTF8))
 
+        self.icon = QLabel(self.widget)
+        self.icon.setGeometry(QRect(75,30,128,128))
+        self.setIcon("xp")
+
         self.osLabel = QTextEdit(self.widget)
         self.osLabel.setReadOnly(True)
         self.osLabel.viewport().setAutoFillBackground(False)
@@ -26,7 +30,7 @@ class LabListing(QWidget):
         self.labLabel.setFrameShape(QTextEdit.NoFrame)
         self.labLabel.setFrameShadow(QTextEdit.Plain)
         self.setLabs("123 Main Str<br>Anytown, USA 13432")
-        self.labLabel.setGeometry(QRect(100,200,400,150))
+        self.labLabel.setGeometry(QRect(100,180,500,450))
         self.labLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
 
         layout = QGridLayout(self)
@@ -42,10 +46,16 @@ class LabListing(QWidget):
         self.labLabel.setHtml(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:20pt; color:#b8860b;\">"+s+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; color:#b8860b;\">"+s+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
-    def setListing(self, listing):
-        self.setOs(listing.name)
+    def setIcon(self, file):
+        img = QPixmap()
+        img.load(self.path + "/images/" + file + "_logo.png")
+        self.icon.setPixmap(img)
+        self.icon.setStyleSheet(QApplication.translate("MainWindow", "background-image: url(null);"
+        "border-radius: 15px;", None, QApplication.UnicodeUTF8))
+
+
 
 if __name__ == "__main__":
 

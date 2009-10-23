@@ -73,7 +73,7 @@ class WelcomeView(object):
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
         self.mailButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/mail.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.labButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/printer.png);\n"
+        self.labButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/itap.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
         self.newsButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/news.png);\n"
         "border-radius: 50px;", None, QtGui.QApplication.UnicodeUTF8))
