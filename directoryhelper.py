@@ -24,6 +24,9 @@ class DirectoryHelper():
         self.fn.clear()
         self.ln.clear()
 
+    def close(self):
+        self.dialog.close()
+
     def populateResultsList(self):
         self.resultListBox.setVisible(True)
         model = QStandardItemModel()

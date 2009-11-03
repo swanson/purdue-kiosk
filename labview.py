@@ -65,6 +65,10 @@ class LabView(object):
         self.listing = LabListing(Dialog)
         self.listing.setGeometry(QRect(400,260,643,575))
 
+        self.homeButton= QPushButton(Dialog)
+        self.homeButton.setGeometry(QRect(10,750,100,100))
+        self.homeButton.setVisible(False)
+
         self.retranslateUi(Dialog)
         QMetaObject.connectSlotsByName(Dialog)
 
@@ -76,6 +80,8 @@ class LabView(object):
                     self.helper.setMac)
         self.sunButton.connect(self.sunButton, SIGNAL("clicked()"), \
                     self.helper.setSun)
+        self.homeButton.connect(self.homeButton, SIGNAL("clicked()"), self.helper.close)
+
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QApplication.translate("Dialog", "Computer Lab Availability", None, QApplication.UnicodeUTF8))
@@ -88,3 +94,6 @@ class LabView(object):
         self.sunButton.setStyleSheet(QApplication.translate("MainWindow", "background-image: url(" + self.path + "/images/sun_logo.png);\n"
         "border-radius: 15px;", None, QApplication.UnicodeUTF8))
         self.loadingLabel.setStyleSheet(QApplication.translate("MainWindow", "font-size: 50px;", None, QApplication.UnicodeUTF8))
+        self.homeButton.setStyleSheet(QApplication.translate("MainWindow", "background-image: url(" + self.path + "/images/home.png);\n"
+        "border-radius: 10px;", None, QApplication.UnicodeUTF8))
+

@@ -25,6 +25,9 @@ class SportsHelper():
         self.middleIndex = 1
         self.rightIndex = 2
 
+    def close(self):
+        self.dialog.close()
+
     def shiftRight(self):
         if (self.rightIndex < 11):
             self.leftIndex += 1
@@ -38,7 +41,7 @@ class SportsHelper():
             self.middleIndex -= 1
             self.rightIndex -= 1
             self.setWidgets()
-        
+
     def setWidgets(self):
         self.scorelist[self.leftIndex].setWidget(self.scoreboard_1)
         self.scorelist[self.middleIndex].setWidget(self.scoreboard_2)
@@ -103,4 +106,4 @@ class FootballScore():
         w.setHomeScore(self.homescore)
         w.setAwayScore(self.awayscore)
         w.setHeadline(self.headline)
-        
+

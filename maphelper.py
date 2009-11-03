@@ -19,6 +19,9 @@ class MapHelper():
         self.dialog.connect(self.results, \
                     SIGNAL("loadFinished(bool)"), self.showContent)
 
+    def close(self):
+        self.dialog.close()
+
     def showContent(self, a):
         js=" if (document.getElementById('overlays').Buildings.checked) \
              { \
@@ -30,8 +33,10 @@ class MapHelper():
         self.progressBar.setVisible(False)
         self.loadingLabel.setVisible(False)
         self.results.setVisible(True)
+        self.form.homeButton.setVisible(True)
 
     def hideContent(self):
         self.results.setVisible(False)
         self.progressBar.setVisible(True)
         self.loadingLabel.setVisible(True)
+        self.form.homeButton.setVisible(False)

@@ -24,8 +24,8 @@ class NewsHelper():
         self.headlineList = []
         self.newsList = []
         self.descList = []
-        
-        
+
+
     def showPage(self):
         self.hideContent()
         self.dialog.show()
@@ -37,8 +37,12 @@ class NewsHelper():
         self.dialog.connect(self.thread, SIGNAL("show()"), self.showContent)
         #self.parseFeeds()
         #self.initializeNews()
-        
+
+    def close(self):
+        self.dialog.close()
+
     def showContent(self):
+        self.form.homeButton.setVisible(True)
         self.progressBar.setVisible(False)
         self.loadingLabel.setVisible(False)
         self.topicListBox.setVisible(True)
@@ -46,12 +50,13 @@ class NewsHelper():
         self.results.setVisible(True)
 
     def hideContent(self):
+        self.form.homeButton.setVisible(False)
         self.progressBar.setVisible(True)
         self.loadingLabel.setVisible(True)
         self.topicListBox.setVisible(False)
         self.headlineListBox.setVisible(False)
-        self.results.setVisible(False)        
-    
+        self.results.setVisible(False)
+
     def parseFeeds(self):
         mech = Browser()
         mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
@@ -85,18 +90,18 @@ class NewsHelper():
                 #story.display()
             self.headlineList.append(headlines)
             self.descList.append(descriptions)
-        self.populateTopicList()        
+        self.populateTopicList()
 
     def populateHeadlineList(self, index):
         index = index.row()
         model = QStandardItemModel()
-        
+
         #generate background gradient
         grad = QLinearGradient(0,0,0,75)
         grad.setColorAt(0, QColor('gray'))
         grad.setColorAt(1, QColor('black'))
 
-        for headline in self.headlineList[index]:                   
+        for headline in self.headlineList[index]:
             item = QStandardItem('%s' % headline)
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
@@ -109,13 +114,13 @@ class NewsHelper():
 
     def initializeNews(self):
         model = QStandardItemModel()
-        
+
         #generate background gradient
         grad = QLinearGradient(0,0,0,75)
         grad.setColorAt(0, QColor('gray'))
         grad.setColorAt(1, QColor('black'))
 
-        for headline in self.headlineList[0]:                   
+        for headline in self.headlineList[0]:
             item = QStandardItem('%s' % headline)
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
@@ -131,13 +136,13 @@ class NewsHelper():
 
     def populateTopicList(self):
         model = QStandardItemModel()
-        
+
         #generate background gradient
         grad = QLinearGradient(0,0,0,75)
         grad.setColorAt(0, QColor('gray'))
         grad.setColorAt(1, QColor('black'))
 
-        for topic in self.topicList:                   
+        for topic in self.topicList:
             item = QStandardItem('%s' % topic)
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
@@ -148,7 +153,7 @@ class NewsHelper():
             model.appendRow(item)
         self.topicListBox.updateModel(model)
         self.initializeNews()
- 
+
     def displayStory(self, index):
         index=index.row()
         index2=self.topicListBox.selectedIndexes()
@@ -222,8 +227,8 @@ class ThreadedNewsParser(QThread):
                 #story.display()
             self.headlineList.append(headlines)
             self.descList.append(descriptions)
-        #self.populateTopicList()     
-        self.emit(SIGNAL("done()"))  
-        self.emit(SIGNAL("show()")) 
+        #self.populateTopicList()
+        self.emit(SIGNAL("done()"))
+        self.emit(SIGNAL("show()"))
 
 

@@ -31,7 +31,11 @@ class LabHelper():
         self.thread = ThreadedLabParser(self.labs)
         self.dialog.connect(self.thread, SIGNAL("done()"), self.showContent)
 
+    def close(self):
+        self.dialog.close()
+
     def showContent(self):
+        self.form.homeButton.setVisible(True)
         self.progressBar.setVisible(False)
         self.loadingLabel.setVisible(False)
         self.xpButton.setVisible(True)
@@ -40,6 +44,7 @@ class LabHelper():
         self.help.setVisible(True)
 
     def hideContent(self):
+        self.form.homeButton.setVisible(False)
         self.progressBar.setVisible(True)
         self.loadingLabel.setVisible(True)
         self.xpButton.setVisible(False)

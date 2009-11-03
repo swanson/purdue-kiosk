@@ -15,11 +15,12 @@ class EmailHelper():
         self.progressBar = form.progressBar
         self.subjectList = []
         self.bodyList = []
-        
+
     def showPage(self):
         self.dialog.show()
-        #self.loadMessages()
-        #self.populateSubjectList()
+
+    def close(self):
+        self.dialog.close()
 
     def checkEmail(self):
         self.progressBar.setVisible(True)
@@ -40,7 +41,7 @@ class EmailHelper():
     def populateSubjectList(self):
         self.progressBar.setVisible(False)
         model = QStandardItemModel()
-        
+
         #generate background gradient
         grad = QLinearGradient(0,0,0,75)
         grad.setColorAt(0, QColor('gray'))
@@ -49,7 +50,7 @@ class EmailHelper():
         for subject in self.subjectList:
             if (subject == ""):
                 item = QStandardItem("No subject.")
-            else:                   
+            else:
                 item = QStandardItem('%s' % subject)
             item.setForeground(QColor('gold'))
             item.setBackground(grad)
@@ -83,12 +84,12 @@ class EmailHelper():
             msg = mailserver.retr(i+1)
             str = string.join(msg[1], "\n")
             mail = email.message_from_string(str)
-    
+
             message += "From: " + mail["From"] + "<br>"
             message += "Subject: " + mail["Subject"] + "<br>"
             message += "Date: " + mail["Date"] + "<br>"
             self.subjectList.append(mail["Subject"])
-    
+
             if mail.is_multipart():
                 for part in mail.walk():
                     if part.get_content_type() == 'text/plain':
@@ -101,7 +102,7 @@ class EmailHelper():
                         break
             else:
                 message += "<br>" + mail.get_payload().replace("\n", "<br>") + "<br>"
-            
+
             self.bodyList.append(message)
             self.progressBar.setValue(float(z) / float(messageLimit) * 100)
 
@@ -134,12 +135,12 @@ class ThreadedEmailParser(QThread):
             msg = mailserver.retr(i+1)
             str = string.join(msg[1], "\n")
             mail = email.message_from_string(str)
-    
+
             message += "From: " + mail["From"] + "<br>"
             message += "Subject: " + mail["Subject"] + "<br>"
             message += "Date: " + mail["Date"] + "<br>"
             self.subjectList.append(mail["Subject"])
-    
+
             if mail.is_multipart():
                 for part in mail.walk():
                     if part.get_content_type() == 'text/plain':
@@ -152,7 +153,7 @@ class ThreadedEmailParser(QThread):
                         break
             else:
                 message += "<br>" + mail.get_payload().replace("\n", "<br>") + "<br>"
-            
+
             self.bodyList.append(message)
             #self.progressBar.setValue(float(z) / float(messageLimit) * 100)
         self.emit(SIGNAL("done()"))

@@ -44,10 +44,17 @@ class MapView(object):
         self.loadingLabel.setText("Loading campus map...")
         self.loadingLabel.setAlignment(Qt.AlignCenter)
 
+        self.homeButton= QPushButton(Dialog)
+        self.homeButton.setGeometry(QRect(10,750,100,100))
+        self.homeButton.setVisible(False)
+
+
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
         self.helper = MapHelper(Dialog, self)
+        self.homeButton.connect(self.homeButton, SIGNAL("clicked()"), self.helper.close)
+
 
     def retranslateUi(self, Dialog):
         path = os.getcwd()
@@ -55,4 +62,7 @@ class MapView(object):
         Dialog.setStyleSheet(QtGui.QApplication.translate("Dialog", "", None, QtGui.QApplication.UnicodeUTF8))
         self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
         self.loadingLabel.setStyleSheet(QtGui.QApplication.translate("MainWindow", "font-size: 50px;", None, QtGui.QApplication.UnicodeUTF8))
+        self.homeButton.setStyleSheet(QApplication.translate("MainWindow", "background-image: url(" + path + "/images/home.png);\n"
+        "border-radius: 10px;", None, QApplication.UnicodeUTF8))
+
 

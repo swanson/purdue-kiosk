@@ -50,6 +50,10 @@ class DirectoryView(object):
         self.listing = DirectoryListing(Dialog)
         self.listing.setGeometry(QtCore.QRect(600,275,664,590))
 
+        self.homeButton= QtGui.QPushButton(Dialog)
+        self.homeButton.setGeometry(QtCore.QRect(10,750,100,100))
+
+
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -57,6 +61,7 @@ class DirectoryView(object):
         self.searchButton.connect(self.searchButton, QtCore.SIGNAL("clicked()"), self.helper.doSearch)
         self.results.connect(self.results, SIGNAL("clicked(QModelIndex)"), \
                                     self.helper.displayInfo)
+        self.homeButton.connect(self.homeButton, SIGNAL("clicked()"), self.helper.close)
 
 
     def retranslateUi(self, Dialog):
@@ -73,3 +78,6 @@ class DirectoryView(object):
         self.searchButton.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color: #a0a0a0; color: #b8860b; font-size: 20pt", None, QtGui.QApplication.UnicodeUTF8))
         self.fnField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color: white; font-size: 20pt", None, QtGui.QApplication.UnicodeUTF8))
         self.lnField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white; font-size: 20pt", None, QtGui.QApplication.UnicodeUTF8))
+        self.homeButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/home.png);\n"
+        "border-radius: 10px;", None, QtGui.QApplication.UnicodeUTF8))
+
