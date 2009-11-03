@@ -17,7 +17,7 @@ class SportsHelper():
         self.scorelist = []
 
     def showPage(self):
-        self.dialog.show()
+        self.dialog.showMaximized()
         del self.scorelist
         self.scorelist = []
         self.doSearch()

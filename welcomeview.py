@@ -14,6 +14,8 @@ class WelcomeView(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,1367,978).size()).expandedTo(MainWindow.minimumSizeHint()))
+        #MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+
 
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")

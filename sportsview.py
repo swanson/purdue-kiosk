@@ -16,6 +16,8 @@ class SportsView(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1372,932).size()).expandedTo(Dialog.minimumSizeHint()))
+        #Dialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+
 
         self.frame = QtGui.QFrame(Dialog)
         self.frame.setGeometry(QtCore.QRect(0,0,1372,932))

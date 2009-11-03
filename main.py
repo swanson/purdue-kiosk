@@ -33,5 +33,5 @@ ui.mailButton.connect(ui.mailButton, QtCore.SIGNAL("clicked()"), emailView.helpe
 ui.mapButton.connect(ui.mapButton, QtCore.SIGNAL("clicked()"), mapView.helper.showPage)
 ui.labButton.connect(ui.labButton, QtCore.SIGNAL("clicked()"), labView.helper.showPage)
 
-window.show()
+window.showMaximized()
 sys.exit(app.exec_())
