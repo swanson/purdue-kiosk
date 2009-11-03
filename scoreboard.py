@@ -1,105 +1,102 @@
-from PyQt4 import QtGui, QtCore
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 import os
 
-class Scoreboard(QtGui.QWidget):
+class Scoreboard(QWidget):
     def __init__(self, parent = None):
-        QtGui.QWidget.__init__(self, parent)
-        
+        QWidget.__init__(self, parent)
+
         self.setFixedSize(371, 551)
         self.setGeometry(0, 0, 371, 551)
-        self.widget = QtGui.QWidget()        
+        self.widget = QWidget()
 
-        self.awayLabel = QtGui.QLabel(self.tr("Away team"))
-        self.awayLabel.setObjectName("awayLabel")
-        self.awayLabel.setWordWrap(True)
+        self.awayLabel = QTextEdit(self.widget)
+        self.awayLabel.setReadOnly(True)
+        self.awayLabel.viewport().setAutoFillBackground(False)
+        self.awayLabel.setFrameShape(QTextEdit.NoFrame)
+        self.awayLabel.setFrameShadow(QTextEdit.Plain)
+        self.awayLabel.setGeometry(QRect(20,200,180,150))
 
-        self.awayScoreLabel = QtGui.QLabel(self.tr("0"))
-        self.awayScoreLabel.setObjectName("awayScoreLabel")
+        self.awayScoreLabel = QLabel(self.widget)
+        self.awayScoreLabel.setGeometry(QRect(210,150,200,150))
 
-        self.homeScoreLabel = QtGui.QLabel(self.tr("10"))
-        self.homeScoreLabel.setObjectName("homeScoreLabel")
+        self.homeScoreLabel = QLabel(self.widget)
+        self.homeScoreLabel.setGeometry(QRect(210,35,200,150))
 
-        self.dateLabel = QtGui.QLabel(self.tr("Jan 1, 1900"))
-        self.dateLabel.setObjectName("dateLabel")
+        self.dateLabel = QLabel(self.widget)
+        self.dateLabel.setGeometry(QRect(125,350,300,150))
 
-        self.headlineLabel = QtGui.QLabel(self.tr("test"))
-        self.headlineLabel.setObjectName("headlineLabel")
-    
+        self.headlineLabel = QLabel(self.widget)
+        self.headlineLabel.setGeometry(QRect(50,250,300,150))
+
         self.path = os.getcwd()
-        self.widget.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(" + self.path + "/images/score.png);", None, QtGui.QApplication.UnicodeUTF8))
-        
-        self.homeScoreLabel.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(null);", None, QtGui.QApplication.UnicodeUTF8))
-        self.setHomeScore('q')        
+        self.widget.setStyleSheet(QApplication.translate("Form", "background-image: url(" + self.path + "/images/score.png);", None, QApplication.UnicodeUTF8))
 
-        self.awayScoreLabel.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(null);", None, QtGui.QApplication.UnicodeUTF8))
-        self.setAwayScore('q')        
+        self.homeScoreLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
+        self.setHomeScore('10')
 
-        self.awayLabel.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(null);", None, QtGui.QApplication.UnicodeUTF8))
-        self.setAwayTeam('q')
+        self.awayScoreLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
+        self.setAwayScore('37')
 
-        self.dateLabel.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(null);", None, QtGui.QApplication.UnicodeUTF8))
-        self.setDate('q')
+        self.awayLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
+        self.setAwayTeam('Minnesota')
 
-        self.headlineLabel.setStyleSheet(QtGui.QApplication.translate("Form", "background-image: url(null);", None, QtGui.QApplication.UnicodeUTF8))
+        self.dateLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
+        self.setDate('09/01')
+
+        self.headlineLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
         self.setHeadline('Purdue wins <br /> Hooray!')
 
-        layout = QtGui.QGridLayout(self)
+        layout = QGridLayout(self)
         layout.addWidget(self.widget, 0, 0, -1, -1)
-        layout.addWidget(self.homeScoreLabel, 0, 1, 1, 1, QtCore.Qt.AlignCenter)
-        layout.addWidget(self.awayScoreLabel, 1, 1, 1, 1, QtCore.Qt.AlignCenter)
-        layout.addWidget(self.awayLabel, 1, 0, 1, 1, QtCore.Qt.AlignCenter)
-        layout.addWidget(self.headlineLabel, 2, 0, 1, 2, QtCore.Qt.AlignCenter)
-        layout.addWidget(self.dateLabel, 3, 0, 1, 2, QtCore.Qt.AlignCenter)
-
-        layout.setRowMinimumHeight(0, 150)
 
     def homeScore(self):
         return self.homeScoreLabel.text()
 
     def setHomeScore(self, score):
-        self.homeScoreLabel.setText(QtGui.QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        self.homeScoreLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\"font-size:66pt; color:#b8860b\">"+score+"</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\"font-size:66pt; color:#b8860b\">"+score+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
     def awayScore(self):
         return self.awayScoreLabel.text()
 
     def setAwayScore(self, score):
-         self.awayScoreLabel.setText(QtGui.QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+         self.awayScoreLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:66pt; color:#b8860b;\">"+score+"</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:66pt; color:#b8860b;\">"+score+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
 
     def awayTeam(self):
         return self.awayLabel.text()
 
     def setAwayTeam(self, team):
-        self.awayLabel.setText(QtGui.QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        self.awayLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:29pt; color:#b8860b;\">" + team + "</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
-        
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; color:#b8860b;\">" + team + "</span></p></body></html>", None, QApplication.UnicodeUTF8))
+
 
     def date(self):
         return self.dateLabel.text()
 
     def setDate(self, datestr):
-        self.dateLabel.setText(QtGui.QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        self.dateLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:29pt; color:#b8860b;\">"+datestr+"</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:29pt; color:#b8860b;\">"+datestr+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
     def headline(self):
         return self.headlineLabel.text()
 
     def setHeadline(self, hl):
-        self.headlineLabel.setText(QtGui.QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        self.headlineLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:29pt; color:#b8860b;\">"+hl+"</span></p>\n"
-        , None, QtGui.QApplication.UnicodeUTF8))
+        , None, QApplication.UnicodeUTF8))
 
 if __name__ == "__main__":
 
