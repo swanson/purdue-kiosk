@@ -26,20 +26,29 @@ def main():
   hid = hid_new_HIDInterface()
   matcher = HIDInterfaceMatcher()
   matcher.vendor_id = 0x046d
-  matcher.product_id = 0xc051
+  matcher.product_id = 0xc00c
 
   ret = hid_force_open(hid, 0, matcher, 3)
   if ret != HID_RET_SUCCESS:
     sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
 
+  #while 1:
+  #  ret, bytes = hid_get_input_report(hid, (0x00010002, 0x00010030), 3)
+  #  if ret != HID_RET_SUCCESS:
+  #    sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
+  #  else:
+  #    for byte in bytes:
+  #      print "%02x" % ord(byte),
+  #    print ""
   while 1:
-    ret, bytes = hid_get_input_report(hid, (0x00010002, 0x00010030), 2)
+    ret, bytes = hid_interrupt_read(hid, 0x81, 7, 1000)
     if ret != HID_RET_SUCCESS:
       sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
     else:
       for byte in bytes:
         print "%02x" % ord(byte),
       print ""
+	
 
 #  ret = hid_write_identification(sys.stdout, hid);
 #  if ret != HID_RET_SUCCESS:
