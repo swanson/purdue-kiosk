@@ -10,10 +10,10 @@ class LabListing(QWidget):
         self.widget = QWidget()
 
         self.path = os.getcwd()
-        self.widget.setStyleSheet(QApplication.translate("Form", "background-image: url(" + self.path + "/images/blank_lab.png);", None, QApplication.UnicodeUTF8))
+        self.widget.setStyleSheet(QApplication.translate("Form", "background-image: url(" + self.path + "/images/blank_lab.png); background-repeat:no-repeat;", None, QApplication.UnicodeUTF8))
 
         self.icon = QLabel(self.widget)
-        self.icon.setGeometry(QRect(75,30,128,128))
+        self.icon.setGeometry(QRect(40,15,128,128))
         self.setIcon("xp")
 
         self.osLabel = QTextEdit(self.widget)
@@ -21,7 +21,7 @@ class LabListing(QWidget):
         self.osLabel.viewport().setAutoFillBackground(False)
         self.osLabel.setFrameShape(QTextEdit.NoFrame)
         self.osLabel.setFrameShadow(QTextEdit.Plain)
-        self.osLabel.setGeometry(QRect(220,25,600,200))
+        self.osLabel.setGeometry(QRect(160,15,600,200))
         self.osLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
 
         self.labLabel = QTextEdit(self.widget)
@@ -30,7 +30,7 @@ class LabListing(QWidget):
         self.labLabel.setFrameShape(QTextEdit.NoFrame)
         self.labLabel.setFrameShadow(QTextEdit.Plain)
         self.setLabs("123 Main Str<br>Anytown, USA 13432")
-        self.labLabel.setGeometry(QRect(100,180,500,450))
+        self.labLabel.setGeometry(QRect(60,140,500,450))
         self.labLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
 
         layout = QGridLayout(self)
@@ -40,13 +40,13 @@ class LabListing(QWidget):
         self.osLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:42pt; color:#b8860b;\">"+s+"<br>Workstations </span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:36pt; color:#b8860b;\">"+s+"<br>Workstations </span></p></body></html>", None, QApplication.UnicodeUTF8))
 
     def setLabs(self, s):
         self.labLabel.setHtml(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; color:#b8860b;\">"+s+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; color:#b8860b;\">"+s+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
     def setIcon(self, file):
         img = QPixmap()
@@ -63,6 +63,6 @@ if __name__ == "__main__":
     from PyQt4.QtGui import QApplication
 
     app = QApplication(sys.argv)
-    widget = DirectoryListing()
+    widget = LabListing()
     widget.show()
     sys.exit(app.exec_())
