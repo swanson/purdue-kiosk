@@ -1,6 +1,6 @@
 from mechanize import Browser
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
-import sys
+import sys, os
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -23,6 +23,10 @@ class MapHelper():
         self.dialog.close()
 
     def showContent(self, a):
+        path = os.getcwd()
+        self.form.frame.setStyleSheet(QApplication.translate("Dialog", \
+        "background-image: url(" + path + "/images/map_bg.png); background-repeat:no-repeat;", \
+        None, QApplication.UnicodeUTF8))
         js=" if (document.getElementById('overlays').Buildings.checked) \
              { \
 	            document.getElementById('overlays').Buildings.click(); \

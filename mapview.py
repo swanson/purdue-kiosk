@@ -16,38 +16,36 @@ from CustomListBox import *
 class MapView(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1378,930).size()).expandedTo(Dialog.minimumSizeHint()))
-
+        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1024,768).size()))
+        #Dialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 
         self.frame = QtGui.QFrame(Dialog)
-        self.frame.setGeometry(QtCore.QRect(0,0,1381,931))
-        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setGeometry(QtCore.QRect(0,0,1024,768))
+        self.frame.setFrameShape(QtGui.QFrame.NoFrame)
         self.frame.setObjectName("frame")
 
         self.resultsField = QWebView(Dialog)
-        self.resultsField.setGeometry(QtCore.QRect(275,125,950,700))
+        self.resultsField.setGeometry(QtCore.QRect(40,25,950,700))
         self.resultsField.setObjectName("resultsField")
         self.resultsField.settings().setAttribute(QWebSettings.JavascriptEnabled, True)
         self.resultsField.page().mainFrame().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
         self.resultsField.page().mainFrame().setScrollBarPolicy(Qt.Horizontal, Qt.ScrollBarAlwaysOff)
 
         self.progressBar = QProgressBar(Dialog)
-        self.progressBar.setGeometry(QRect(450, 450, 600, 100))
+        self.progressBar.setGeometry(QRect(240, 350, 600, 100))
         self.progressBar.setVisible(False)
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(0)
         self.progressBar.setValue(1)
 
         self.loadingLabel = QLabel(Dialog)
-        self.loadingLabel.setGeometry(QRect(450, 350, 600, 100))
+        self.loadingLabel.setGeometry(QRect(240, 190, 600, 200))
         self.loadingLabel.setText("Loading campus map...")
         self.loadingLabel.setAlignment(Qt.AlignCenter)
 
         self.homeButton= QPushButton(Dialog)
-        self.homeButton.setGeometry(QRect(10,750,100,100))
+        self.homeButton.setGeometry(QRect(10,680,80,80))
         self.homeButton.setVisible(False)
-
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -60,9 +58,9 @@ class MapView(object):
         path = os.getcwd()
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Campus News", None, QtGui.QApplication.UnicodeUTF8))
         Dialog.setStyleSheet(QtGui.QApplication.translate("Dialog", "", None, QtGui.QApplication.UnicodeUTF8))
-        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
+        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png); background-repeat:no-repeat;", None, QtGui.QApplication.UnicodeUTF8))
         self.loadingLabel.setStyleSheet(QtGui.QApplication.translate("MainWindow", "font-size: 50px;", None, QtGui.QApplication.UnicodeUTF8))
-        self.homeButton.setStyleSheet(QApplication.translate("MainWindow", "background-image: url(" + path + "/images/home.png);\n"
+        self.homeButton.setStyleSheet(QApplication.translate("MainWindow", "background-image: url(" + path + "/images/home.png); background-repeat:no-repeat;\n"
         "border-radius: 10px;", None, QApplication.UnicodeUTF8))
 
 
