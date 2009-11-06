@@ -32,6 +32,8 @@ ui.newsButton.connect(ui.newsButton, QtCore.SIGNAL("clicked()"), newsView.helper
 ui.mailButton.connect(ui.mailButton, QtCore.SIGNAL("clicked()"), emailView.helper.showPage)
 ui.mapButton.connect(ui.mapButton, QtCore.SIGNAL("clicked()"), mapView.helper.showPage)
 ui.labButton.connect(ui.labButton, QtCore.SIGNAL("clicked()"), labView.helper.showPage)
+#temp button to close program
+ui.exit.connect(ui.exit, QtCore.SIGNAL("clicked()"), window.close)
 
-window.showMaximized()
+window.show()
 sys.exit(app.exec_())
