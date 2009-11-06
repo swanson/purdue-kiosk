@@ -15,22 +15,22 @@ class Scoreboard(QWidget):
         self.awayLabel.viewport().setAutoFillBackground(False)
         self.awayLabel.setFrameShape(QTextEdit.NoFrame)
         self.awayLabel.setFrameShadow(QTextEdit.Plain)
-        self.awayLabel.setGeometry(QRect(20,200,180,150))
+        self.awayLabel.setGeometry(QRect(15,150,160,150))
 
         self.awayScoreLabel = QLabel(self.widget)
-        self.awayScoreLabel.setGeometry(QRect(210,150,200,150))
+        self.awayScoreLabel.setGeometry(QRect(180,100,100,150))
 
         self.homeScoreLabel = QLabel(self.widget)
-        self.homeScoreLabel.setGeometry(QRect(210,35,200,150))
+        self.homeScoreLabel.setGeometry(QRect(180,5,200,150))
 
         self.dateLabel = QLabel(self.widget)
-        self.dateLabel.setGeometry(QRect(125,350,300,150))
+        self.dateLabel.setGeometry(QRect(90,280,300,150))
 
         self.headlineLabel = QLabel(self.widget)
-        self.headlineLabel.setGeometry(QRect(50,250,300,150))
+        self.headlineLabel.setGeometry(QRect(50,215,300,150))
 
         self.path = os.getcwd()
-        self.widget.setStyleSheet(QApplication.translate("Form", "background-image: url(" + self.path + "/images/score.png);", None, QApplication.UnicodeUTF8))
+        self.widget.setStyleSheet(QApplication.translate("Form", "background-image: url(" + self.path + "/images/score.png); background-repeat:no-repeat;", None, QApplication.UnicodeUTF8))
 
         self.homeScoreLabel.setStyleSheet(QApplication.translate("Form", "background-image: url(null);", None, QApplication.UnicodeUTF8))
         self.setHomeScore('10')
@@ -57,7 +57,7 @@ class Scoreboard(QWidget):
         self.homeScoreLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\"font-size:66pt; color:#b8860b\">"+score+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\"font-size:45pt; color:#b8860b\">"+score+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
     def awayScore(self):
         return self.awayScoreLabel.text()
@@ -66,7 +66,7 @@ class Scoreboard(QWidget):
          self.awayScoreLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:66pt; color:#b8860b;\">"+score+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:45pt; color:#b8860b;\">"+score+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
 
     def awayTeam(self):
@@ -76,7 +76,7 @@ class Scoreboard(QWidget):
         self.awayLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; color:#b8860b;\">" + team + "</span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:22pt; color:#b8860b;\">" + team + "</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
 
     def date(self):
@@ -86,7 +86,7 @@ class Scoreboard(QWidget):
         self.dateLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:29pt; color:#b8860b;\">"+datestr+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; color:#b8860b;\">"+datestr+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
 
     def headline(self):
         return self.headlineLabel.text()
@@ -95,7 +95,7 @@ class Scoreboard(QWidget):
         self.headlineLabel.setText(QApplication.translate("Form", "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         "p, li { white-space: pre-wrap; }\n"
         "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:29pt; color:#b8860b;\">"+hl+"</span></p>\n"
+        "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; color:#b8860b;\">"+hl+"</span></p>\n"
         , None, QApplication.UnicodeUTF8))
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 *.swp
 *.pyc
 *.swo
+*.swn
 testbed/*
 html/*
