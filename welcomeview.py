@@ -20,7 +20,7 @@ class WelcomeView(object):
         self.centralwidget.setObjectName("centralwidget")
 
         self.widget = QtGui.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(0,0,1371,931))
+        self.widget.setGeometry(QtCore.QRect(0,0,1024,768))
         self.widget.setObjectName("widget")
 
         self.mailButton = QtGui.QPushButton(self.widget)

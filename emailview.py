@@ -17,24 +17,23 @@ from CustomListBox import *
 class EmailView(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1378,930).size()).expandedTo(Dialog.minimumSizeHint()))
-
+        Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1024,768).size()))
+        Dialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 
         self.frame = QtGui.QFrame(Dialog)
-        self.frame.setGeometry(QtCore.QRect(0,0,1381,931))
-        self.frame.setFrameShape(QtGui.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtGui.QFrame.Raised)
+        self.frame.setGeometry(QtCore.QRect(0,0,1024,768))
+        self.frame.setFrameShape(QtGui.QFrame.NoFrame)
         self.frame.setObjectName("frame")
 
         self.userNameField = QLineEdit(Dialog)
-        self.userNameField.setGeometry(QRect(175, 200, 100, 28))
+        self.userNameField.setGeometry(QRect(300, 100, 200, 50))
 
         self.passwordField = QLineEdit(Dialog)
-        self.passwordField.setGeometry(QRect(300, 200, 100, 28))
+        self.passwordField.setGeometry(QRect(550, 100, 200, 50))
         self.passwordField.setEchoMode(QLineEdit.Password)
 
         self.checkEmailButton = QPushButton(Dialog)
-        self.checkEmailButton.setGeometry(QRect(450, 200, 100, 50))
+        self.checkEmailButton.setGeometry(QRect(800, 100, 100, 50))
         self.checkEmailButton.setText("Check email")
 
         self.progressBar = QProgressBar(Dialog)
@@ -42,14 +41,14 @@ class EmailView(object):
         self.progressBar.setVisible(False)
 
         self.subjectListBox = CustomListBox(Dialog)
-        self.subjectListBox.setGeometry(QtCore.QRect(175,275,400,500))
+        self.subjectListBox.setGeometry(QtCore.QRect(125,200,300,500))
 
         self.messageDisplay = QWebView(Dialog)
-        self.messageDisplay.setGeometry(QtCore.QRect(600, 275, 600, 500))
+        self.messageDisplay.setGeometry(QtCore.QRect(435, 200, 500, 500))
         self.messageDisplay.setVisible(False)
 
         self.homeButton= QtGui.QPushButton(Dialog)
-        self.homeButton.setGeometry(QtCore.QRect(10,750,100,100))
+        self.homeButton.setGeometry(QtCore.QRect(10,680,80,80))
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -68,8 +67,6 @@ class EmailView(object):
         path = os.getcwd()
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Purdue Webmail", None, QtGui.QApplication.UnicodeUTF8))
         Dialog.setStyleSheet(QtGui.QApplication.translate("Dialog", "", None, QtGui.QApplication.UnicodeUTF8))
-        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png)", None, QtGui.QApplication.UnicodeUTF8))
-        self.homeButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/home.png);\n"
+        self.frame.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-image: url(" + path + "/images/mockup_blank_template.png); background-repeat:no-repeat;", None, QtGui.QApplication.UnicodeUTF8))
+        self.homeButton.setStyleSheet(QtGui.QApplication.translate("MainWindow", "background-image: url(" + path + "/images/home.png); background-repeat:no-repeat;\n"
         "border-radius: 10px;", None, QtGui.QApplication.UnicodeUTF8))
-
-
