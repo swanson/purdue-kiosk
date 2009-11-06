@@ -113,7 +113,7 @@ class ThreadedDirectoryParser(QThread):
             if (len(addr.contents)):
                 addr = addr.contents[0]
             else:
-                addr = "<br>Not listed"
+                addr = "Not listed"
 
             univ = item.find('univ')
             if (len(univ.contents)):
