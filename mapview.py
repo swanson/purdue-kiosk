@@ -17,7 +17,7 @@ class MapView(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(QtCore.QSize(QtCore.QRect(0,0,1024,768).size()))
-        #Dialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        Dialog.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 
         self.frame = QtGui.QFrame(Dialog)
         self.frame.setGeometry(QtCore.QRect(0,0,1024,768))
