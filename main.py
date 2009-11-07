@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from PyQt4 import QtGui
 from welcomeview import *
 from directoryview import *
@@ -34,6 +34,8 @@ ui.mapButton.connect(ui.mapButton, QtCore.SIGNAL("clicked()"), mapView.helper.sh
 ui.labButton.connect(ui.labButton, QtCore.SIGNAL("clicked()"), labView.helper.showPage)
 #temp button to close program
 ui.exit.connect(ui.exit, QtCore.SIGNAL("clicked()"), window.close)
+test = QtGui.QCursor(QtGui.QPixmap(os.getcwd()+"/images/finger.png"), 126, 31)
+app.setOverrideCursor(test)
 
 window.show()
 sys.exit(app.exec_())
