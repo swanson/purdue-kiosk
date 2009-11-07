@@ -1,6 +1,6 @@
 from mechanize import Browser
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
-import sys
+import sys, re, string
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -19,11 +19,17 @@ class NewsHelper():
                         'http://feeds.feedburner.com/PurdueResearchNews?format=xml', \
                         'http://feeds.feedburner.com/PurdueBusinessNews?format=xml', \
                         'http://feeds.feedburner.com/PurdueEventNews?format=xml']
-        self.topicList = ['Student News', 'Engineering News', 'Research News', \
-                         'Business News', 'Events']
+        self.topicList = ['Student', 'Engineering', 'Research', \
+                         'Business', 'Events']
         self.headlineList = []
         self.newsList = []
         self.descList = []
+        self.regex = re.compile('<!-- AddThis Button END.*AddThis Button BEGIN -->', re.M | re.S)
+        self.regex2 = re.compile('<TABLE.*</table>', re.M | re.S)
+        self.mech = Browser()
+        self.mech.addheaders = [ ('User-agent', 'Mozilla/5.0 (compatible)') ]
+        self.mech.set_handle_robots(False)
+
 
 
     def showPage(self):
@@ -130,9 +136,10 @@ class NewsHelper():
             item.setEditable(False)
             model.appendRow(item)
         self.headlineListBox.updateModel(model)
-        #self.results.setText('%s' % self.descList[0][0])
-        self.results.setUrl(QUrl('%s' % self.descList[0][0]))
-
+        page = self.mech.open('%s' % self.descList[0][0])
+        html = page.read()
+        article = self.regex.search(html).group()
+        self.results.setHtml(QString('%s' % self.regex2.sub('', article)))
 
     def populateTopicList(self):
         model = QStandardItemModel()
@@ -161,10 +168,10 @@ class NewsHelper():
             index2 = index2[0].row()
         else:
             index2 = 0
-        #self.results.clear()
-        #print self.descList[index][index2]
-        #self.results.setText('%s' % self.descList[index2][index])
-        self.results.setUrl(QUrl('%s' % self.descList[index2][index]))
+        page = self.mech.open('%s' % self.descList[index2][index])
+        html = page.read()
+        article = self.regex.search(html).group()
+        self.results.setHtml(QString('%s' % self.regex2.sub('', article)))
 
 class NewsStory():
     def __init__(self, date, title, link, desc):
