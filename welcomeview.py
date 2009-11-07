@@ -61,6 +61,7 @@ class WelcomeView(object):
         #temp button to close program while testing without border
         self.exit = QtGui.QPushButton(self.widget)
         self.exit.setGeometry(QtCore.QRect(20,710, 60, 30))
+        self.exit.setText("exit")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
