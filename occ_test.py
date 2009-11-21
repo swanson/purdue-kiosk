@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import time
-import sys
+import os
 from hid import *
 
 def int32(x):
@@ -25,7 +25,7 @@ matcher = HIDInterfaceMatcher()
 matcher.vendor_id = 0x03eb
 matcher.product_id = 0x204f
 
-last_sleeping = False
+last_sleeping = True
 
 try:
    ret = hid_force_open(hid, 0, matcher, 3)
@@ -38,19 +38,19 @@ try:
          sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
       else:
          if bytes[0] == '\x01':
-            print "sleeping"
+#            print "sleeping"
             if last_sleeping == False:
                os.system("xset dpms force off")
          else:
             if last_sleeping == True:
                os.system("xset dpms force on")
-            print "awake"
+#            print "awake"
 
          if bytes[0] == '\x01':
             last_sleeping = True
          else:
             last_sleeping = False
-      time.sleep(5)
+      time.sleep(1)
 
    ret = hid_close(hid)
    if ret != HID_RET_SUCCESS:
