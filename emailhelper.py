@@ -20,7 +20,7 @@ class EmailHelper():
 
     def showPage(self):
         self.dialog.show()
-        self.listener = USBListener("0007","1337") #use real vendor/product
+        self.listener = USBListener("0007","1337", 0) #use real vendor/product
         self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
         self.listener.start()
 
@@ -164,11 +164,12 @@ class ThreadedEmailParser(QThread):
         self.emit(SIGNAL("done()"))
 
 class USBListener(QThread):
-    def __init__(self, vendor, product, parent = None):
+    def __init__(self, vendor, product, intnum, parent = None):
         QThread.__init__(self, parent)
         self.vendor = vendor
         self.product = product
         self.running = 1
+        self.interface_number = intnum
         self.setupHIDListener()
 
     def run(self):
@@ -182,7 +183,7 @@ class USBListener(QThread):
         self.hid = hid_new_HIDInterface()
         self.matcher = HIDInterfaceMatcher()
 
-        ret = hid_force_open(self.hid, 0, self.matcher, 3)
+        ret = hid_force_open(self.hid, self.interface_number, self.matcher, 3)
         if ret != HID_RET_SUCCESS:
             sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
 
