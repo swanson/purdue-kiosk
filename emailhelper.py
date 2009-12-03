@@ -1,7 +1,8 @@
 import poplib, email
-import sys, string, threading
+import sys, string, threading, time
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from hid import *
 
 class EmailHelper():
 
@@ -15,17 +16,25 @@ class EmailHelper():
         self.progressBar = form.progressBar
         self.subjectList = []
         self.bodyList = []
+        self.database = {0x0016131238:'mdswanso'} #add all users here
 
     def showPage(self):
         self.dialog.show()
+        self.listener = USBListener("0007","1337") #use real vendor/product
+        self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
+        self.listener.start()
+
+    def lookupPUID(self, id):
+        print "looking for %i" % id
+        self.userNameField.setText("%s" % self.database[id])
 
     def close(self):
         self.dialog.close()
+        self.listener.cleanup()
 
     def checkEmail(self):
         self.progressBar.setVisible(True)
         self.progressBar.setValue(1)
-        #self.loadMessages()
         self.thread = ThreadedEmailParser(self.userNameField.text(), \
                                     self.passwordField.text(), \
                                     self.subjectList, self.bodyList,
@@ -34,9 +43,6 @@ class EmailHelper():
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(0)
         self.progressBar.setValue(1)
-        #threading.Thread(target=self.loadMessages).start()
-        #self.populateSubjectList()
-        #self.progressBar.setVisible(False)
 
     def populateSubjectList(self):
         self.progressBar.setVisible(False)
@@ -155,7 +161,66 @@ class ThreadedEmailParser(QThread):
                 message += "<br>" + mail.get_payload().replace("\n", "<br>") + "<br>"
 
             self.bodyList.append(message)
-            #self.progressBar.setValue(float(z) / float(messageLimit) * 100)
         self.emit(SIGNAL("done()"))
 
+class USBListener(QThread):
+    def __init__(self, vendor, product, parent = None):
+        QThread.__init__(self, parent)
+        self.vendor = vendor
+        self.product = product
+        self.running = 1
+        self.setupHIDListener()
 
+    def run(self):
+        self.listen()
+
+    def setupHIDListener(self):
+        ret = hid_init()
+        if ret != HID_RET_SUCCESS:
+            sys.stderr.write("hid_init failed with return code %d.\n" % ret)
+
+        self.hid = hid_new_HIDInterface()
+        self.matcher = HIDInterfaceMatcher()
+
+        ret = hid_force_open(self.hid, 0, self.matcher, 3)
+        if ret != HID_RET_SUCCESS:
+            sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
+
+    def cleanup(self):
+        self. running = 0
+        ret = hid_close(self.hid)
+        if ret != HID_RET_SUCCESS:
+            sys.stderr.write("hid_close failed with return code %d.\n" % ret)
+        hid_cleanup()
+
+    def int32(self, x):
+        if x>0xFFFFFFFF:
+            raise OverflowError
+        if x>0x7FFFFFFF:
+            x=int(0x100000000-x)
+        if x<2147483648:
+            return -x
+        else:
+            return -2147483648
+        return x
+
+    def listen(self):
+        print "listening for hid at %s:%s" % (self.vendor, self.product)
+        #remove hard-coded test values
+        endpoint = self.int32(0xff9c0001)
+        puid = 0x0016131238
+        ret = 0
+        while self.running:
+            #implement interrupt reading
+            #ret, bytes = hid_interrupt_read(self.hid, endpoint, 1, 10)
+            #mag reader sends interrupts
+            #byte 0 - status
+            #byte 1 - 4 : 32bit int - PUID
+            if ret != HID_RET_SUCCESS:
+                sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
+            else:
+                self.emit(SIGNAL("foundPUID"), puid)
+                print "scanned %i" % puid
+                ret = 1
+
+            time.sleep(1)
