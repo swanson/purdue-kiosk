@@ -1,5 +1,5 @@
 import poplib, email
-import sys, string, threading, time
+import sys, string, threading, time, socket, os
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from hid import *
@@ -40,9 +40,17 @@ class EmailHelper():
                                     self.subjectList, self.bodyList,
                                     self.progressBar)
         self.dialog.connect(self.thread, SIGNAL("done()"), self.populateSubjectList)
+        self.dialog.connect(self.thread, SIGNAL("loginError"), self.handleError)
+        self.thread.start()
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(0)
         self.progressBar.setValue(1)
+
+    def handleError(self):
+        self.progressBar.setVisible(False)
+        QMessageBox.critical(self.dialog, "Login Error", \
+                "Your user name and/or password was incorrect!\nPlease try again.")
+
 
     def populateSubjectList(self):
         self.progressBar.setVisible(False)
@@ -73,45 +81,6 @@ class EmailHelper():
         self.messageDisplay.setVisible(True)
         self.messageDisplay.setHtml(QString('%s' % self.bodyList[index]))
 
-    def loadMessages(self):
-        username = self.userNameField.text()
-        password = self.passwordField.text()
-        mailserver = poplib.POP3_SSL('%s.mail.purdue.edu' % username)
-        mailserver.user(username)
-        mailserver.pass_(password)
-        numMessages = len(mailserver.list()[1])
-        z=0
-        messageLimit = 15
-        for i in reversed(range(numMessages)):
-            message = ""
-            z += 1
-            if (z > messageLimit):
-                break
-            msg = mailserver.retr(i+1)
-            str = string.join(msg[1], "\n")
-            mail = email.message_from_string(str)
-
-            message += "From: " + mail["From"] + "<br>"
-            message += "Subject: " + mail["Subject"] + "<br>"
-            message += "Date: " + mail["Date"] + "<br>"
-            self.subjectList.append(mail["Subject"])
-
-            if mail.is_multipart():
-                for part in mail.walk():
-                    if part.get_content_type() == 'text/plain':
-                        message += "<br>" + part.get_payload().replace("\n", "<br>") \
-                                     + "<br>"
-                        break
-                    if part.get_content_type() == 'text/html':
-                        message += "<br>" + part.get_payload().replace("\n", "<br>") \
-                                     + "<br>"
-                        break
-            else:
-                message += "<br>" + mail.get_payload().replace("\n", "<br>") + "<br>"
-
-            self.bodyList.append(message)
-            self.progressBar.setValue(float(z) / float(messageLimit) * 100)
-
 class ThreadedEmailParser(QThread):
     def __init__(self, username, pw, sl, bl, pb, parent = None):
         QThread.__init__(self, parent)
@@ -121,16 +90,24 @@ class ThreadedEmailParser(QThread):
         self.subjectList = sl
         self.bodyList = bl
         self.progressBar = pb
-        self.start()
+        #self.start()
 
     def run(self):
         self.parseMessages()
 
     def parseMessages(self):
-        mailserver = poplib.POP3_SSL('%s.mail.purdue.edu' % self.user)
-        mailserver.user(self.user)
-        mailserver.pass_(self.pw)
-        numMessages = len(mailserver.list()[1])
+        try:
+            mailserver = poplib.POP3_SSL('%s.mail.purdue.edu' % self.user)
+        except socket.error:
+            self.emit(SIGNAL("loginError"))
+            return
+        try:
+            mailserver.user(self.user)
+            mailserver.pass_(self.pw)
+            numMessages = len(mailserver.list()[1])
+        except poplib.error_proto:
+            self.emit(SIGNAL("loginError"))
+            return
         z=0
         messageLimit = 15
         for i in reversed(range(numMessages)):
