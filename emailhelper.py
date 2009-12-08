@@ -16,11 +16,11 @@ class EmailHelper():
         self.progressBar = form.progressBar
         self.subjectList = []
         self.bodyList = []
-        self.database = {0x0016131238:'mdswanso'} #add all users here
+        self.database = {1613123:'mdswanso', 1618372:'jsweval', 1640427:'tsafford', 1569702:'rwillmot'} #add all users here
 
     def showPage(self):
         self.dialog.show()
-        self.listener = USBListener("0007","1337", 0) #use real vendor/product
+        self.listener = USBListener(0x03eb,0x204f, 0) #use real vendor/product
         self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
         self.listener.start()
 
@@ -159,13 +159,15 @@ class USBListener(QThread):
 
         self.hid = hid_new_HIDInterface()
         self.matcher = HIDInterfaceMatcher()
+        self.matcher.vendor_id = self.vendor
+        self.matcher.product_id = self.product
 
         ret = hid_force_open(self.hid, self.interface_number, self.matcher, 3)
         if ret != HID_RET_SUCCESS:
             sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
 
     def cleanup(self):
-        self. running = 0
+        self.running = 0
         ret = hid_close(self.hid)
         if ret != HID_RET_SUCCESS:
             sys.stderr.write("hid_close failed with return code %d.\n" % ret)
@@ -183,22 +185,17 @@ class USBListener(QThread):
         return x
 
     def listen(self):
-        print "listening for hid at %s:%s" % (self.vendor, self.product)
-        #remove hard-coded test values
-        endpoint = self.int32(0xff9c0001)
-        puid = 0x0016131238
-        ret = 0
         while self.running:
-            #implement interrupt reading
-            #ret, bytes = hid_interrupt_read(self.hid, endpoint, 1, 10)
-            #mag reader sends interrupts
-            #byte 0 - status
-            #byte 1 - 4 : 32bit int - PUID
-            if ret != HID_RET_SUCCESS:
-                sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
-            else:
-                self.emit(SIGNAL("foundPUID"), puid)
-                print "scanned %i" % puid
-                ret = 1
-
+            ret, bytes = hid_interrupt_read(self.hid, 0x81, 5, 1000)
+            if ret != HID_RET_SUCCESS and ret != HID_RET_FAIL_INT_READ:
+                sys.stderr.write("hid_interrupt_read failed with return code %d.\n" % ret)
+            elif ret != HID_RET_FAIL_INT_READ:
+                puid = 0
+                for i in range(4,0,-1):
+                    puid <<= 8
+                    puid += ord(bytes[i])
+                
+                if (sum != 0):
+                    self.emit(SIGNAL("foundPUID"), puid)
+            pass
             time.sleep(1)
