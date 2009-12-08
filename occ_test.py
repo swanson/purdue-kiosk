@@ -27,30 +27,39 @@ matcher.product_id = 0x204f
 
 last_sleeping = True
 
+first_read = True
+
 try:
    ret = hid_force_open(hid, 0, matcher, 3)
    if ret != HID_RET_SUCCESS:
       sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
 
    while 1:
-      ret, bytes = hid_get_input_report(hid, (int32(0xff9c0001), int32(0xff9c0002)), 1)
-      if ret != HID_RET_SUCCESS:
-         sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
-      else:
-         if bytes[0] == '\x01':
-#            print "sleeping"
-            if last_sleeping == False:
+      ret, bytes = hid_interrupt_read(hid, 0x81, 1, 1000)
+      if ret != HID_RET_SUCCESS and ret != HID_RET_FAIL_INT_READ:
+         sys.stderr.write("hid_interrupt_read failed with return code %d.\n" % ret)
+      elif ret != HID_RET_FAIL_INT_READ:
+         if first_read:
+            first_read = False
+         else:
+            if bytes[0] == '\x01':
                os.system("xset dpms force off")
-         else:
-            if last_sleeping == True:
+            else:
                os.system("xset dpms force on")
-#            print "awake"
-
-         if bytes[0] == '\x01':
-            last_sleeping = True
-         else:
-            last_sleeping = False
-      time.sleep(1)
+#         for byte in bytes:
+#            print "%02x" % ord(byte),
+#         if (len(bytes) > 0):
+#            print ""
+#         if bytes[0] == '\x01':
+#            if last_sleeping == False:
+#               os.system("xset dpms force off")
+#         else:
+#            if last_sleeping == True:
+#               os.system("xset dpms force on")
+#            if bytes[0] == '\x01':
+#               last_sleeping = True
+#            else:
+#               last_sleeping = False
 
    ret = hid_close(hid)
    if ret != HID_RET_SUCCESS:

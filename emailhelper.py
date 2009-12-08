@@ -19,10 +19,10 @@ class EmailHelper():
         self.bodyList = []
         self.database = {1613123:'mdswanso', \
                          1618372:'jsweval', \
-                         1640427:'tsafford' \
+                         1640427:'tsafford', \
                          1621852:'zcurosh' } #add all users here
 
-        self.listener = USBListener(0x03eb,0x204f, 0) #use real vendor/product
+        self.listener = USBListener(0x03eb,0x204f, 1) #use real vendor/product
         self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
 
 
@@ -45,8 +45,9 @@ class EmailHelper():
         self.messageDisplay.setVisible(False)
 
     def close(self):
+        #self.listener.cleanup()
         self.dialog.close()
-        self.listener.cleanup()
+
 
     def checkEmail(self):
         if len(self.userNameField.text()) < 1:
@@ -210,7 +211,7 @@ class USBListener(QThread):
 
     def listen(self):
         while self.running:
-            ret, bytes = hid_interrupt_read(self.hid, 0x81, 5, 1000)
+            ret, bytes = hid_interrupt_read(self.hid, 0x82, 5, 1000)
             if ret != HID_RET_SUCCESS and ret != HID_RET_FAIL_INT_READ:
                 sys.stderr.write("hid_interrupt_read failed with return code %d.\n" % ret)
             elif ret != HID_RET_FAIL_INT_READ:
@@ -219,7 +220,6 @@ class USBListener(QThread):
                     puid <<= 8
                     puid += ord(bytes[i])
 
-                if (sum != 0):
+                if (puid != 0):
                     self.emit(SIGNAL("foundPUID"), puid)
-            pass
             time.sleep(1)
