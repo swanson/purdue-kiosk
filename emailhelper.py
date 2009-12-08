@@ -14,26 +14,46 @@ class EmailHelper():
         self.userNameField = form.userNameField
         self.passwordField = form.passwordField
         self.progressBar = form.progressBar
+        self.loadingLabel = form.loadingLabel
         self.subjectList = []
         self.bodyList = []
-        self.database = {1613123:'mdswanso', 1618372:'jsweval', 1640427:'tsafford', 1569702:'rwillmot'} #add all users here
+        self.database = {1613123:'mdswanso', \
+                         1618372:'jsweval', \
+                         1640427:'tsafford' } #add all users here
+
+        self.listener = USBListener(0x03eb,0x204f, 0) #use real vendor/product
+        self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
+
 
     def showPage(self):
         self.dialog.show()
-        self.listener = USBListener(0x03eb,0x204f, 0) #use real vendor/product
-        self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
+        self.userNameField.setText("")
+        self.passwordField.setText("")
+        self.subjectList = []
+        self.subjectListBox.setVisible(False)
+        self.messageDisplay.setVisible(False)
+        self.loadingLabel.setVisible(False)
         self.listener.start()
 
     def lookupPUID(self, id):
         print "looking for %i" % id
         self.userNameField.setText("%s" % self.database[id])
+        self.passwordField.setText("")
+        self.subjectList = []
+        self.subjectListBox.setVisible(False)
+        self.messageDisplay.setVisible(False)
 
     def close(self):
         self.dialog.close()
         self.listener.cleanup()
 
     def checkEmail(self):
+        if len(self.userNameField.text()) < 1:
+            return
+        if len(self.passwordField.text()) < 1:
+            return
         self.progressBar.setVisible(True)
+        self.loadingLabel.setVisible(True)
         self.progressBar.setValue(1)
         self.thread = ThreadedEmailParser(self.userNameField.text(), \
                                     self.passwordField.text(), \
@@ -48,12 +68,15 @@ class EmailHelper():
 
     def handleError(self):
         self.progressBar.setVisible(False)
+        self.loadingLabel.setVisible(False)
         QMessageBox.critical(self.dialog, "Login Error", \
                 "Your user name and/or password was incorrect!\nPlease try again.")
 
 
     def populateSubjectList(self):
         self.progressBar.setVisible(False)
+        self.loadingLabel.setVisible(False)
+        self.subjectListBox.setVisible(True)
         model = QStandardItemModel()
 
         #generate background gradient
@@ -145,11 +168,11 @@ class USBListener(QThread):
         QThread.__init__(self, parent)
         self.vendor = vendor
         self.product = product
-        self.running = 1
         self.interface_number = intnum
         self.setupHIDListener()
 
     def run(self):
+        self.running = 1
         self.listen()
 
     def setupHIDListener(self):
@@ -194,7 +217,7 @@ class USBListener(QThread):
                 for i in range(4,0,-1):
                     puid <<= 8
                     puid += ord(bytes[i])
-                
+
                 if (sum != 0):
                     self.emit(SIGNAL("foundPUID"), puid)
             pass

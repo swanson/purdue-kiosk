@@ -37,8 +37,16 @@ class EmailView(object):
         self.checkEmailButton.setText("Check email")
 
         self.progressBar = QProgressBar(Dialog)
-        self.progressBar.setGeometry(QRect(600, 200, 300, 50))
+        self.progressBar.setGeometry(QRect(240, 400, 600, 100))
         self.progressBar.setVisible(False)
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(0)
+        self.progressBar.setValue(1)
+
+        self.loadingLabel = QLabel(Dialog)
+        self.loadingLabel.setGeometry(QRect(240, 190, 600, 200))
+        self.loadingLabel.setText("Loading emails...")
+        self.loadingLabel.setAlignment(Qt.AlignCenter)
 
         self.subjectListBox = CustomListBox(Dialog)
         self.subjectListBox.setGeometry(QtCore.QRect(125,200,300,500))
@@ -72,4 +80,4 @@ class EmailView(object):
         "border-radius: 10px;", None, QtGui.QApplication.UnicodeUTF8))
         self.userNameField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color: white; font-size: 20pt", None, QtGui.QApplication.UnicodeUTF8))
         self.passwordField.setStyleSheet(QtGui.QApplication.translate("Dialog", "background-color:white; font-size: 20pt", None, QtGui.QApplication.UnicodeUTF8))
-
+        self.loadingLabel.setStyleSheet(QApplication.translate("MainWindow", "font-size: 50px;", None, QApplication.UnicodeUTF8))
