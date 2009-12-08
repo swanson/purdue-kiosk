@@ -19,7 +19,8 @@ class EmailHelper():
         self.bodyList = []
         self.database = {1613123:'mdswanso', \
                          1618372:'jsweval', \
-                         1640427:'tsafford' } #add all users here
+                         1640427:'tsafford' \
+                         1621852:'zcurosh' } #add all users here
 
         self.listener = USBListener(0x03eb,0x204f, 0) #use real vendor/product
         self.dialog.connect(self.listener, SIGNAL("foundPUID"), self.lookupPUID)
