@@ -15,6 +15,11 @@ def int32(x):
       return -2147483648
    return x
 
+   
+hid_set_debug(HID_DEBUG_NONE)
+hid_set_debug_stream(sys.stderr)
+hid_set_usb_debug(0)
+
 ret = hid_init()
 if ret != HID_RET_SUCCESS:
    sys.stderr.write("hid_init failed with return code %d.\n" % ret)
@@ -30,12 +35,12 @@ last_sleeping = True
 first_read = True
 
 try:
-   ret = hid_force_open(hid, 0, matcher, 3)
+   ret = hid_force_open(hid, 2, matcher, 3)
    if ret != HID_RET_SUCCESS:
       sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
 
    while 1:
-      ret, bytes = hid_interrupt_read(hid, 0x81, 1, 1000)
+      ret, bytes = hid_interrupt_read(hid, 0x83, 1, 1000)
       if ret != HID_RET_SUCCESS and ret != HID_RET_FAIL_INT_READ:
          sys.stderr.write("hid_interrupt_read failed with return code %d.\n" % ret)
       elif ret != HID_RET_FAIL_INT_READ:

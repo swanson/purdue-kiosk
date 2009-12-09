@@ -27,7 +27,10 @@ class EmailHelper():
 
 
     def showPage(self):
-        self.dialog.show()
+        self.dialog.showMaximized()
+        self.dialog.resize(QSize(QRect(0,0,1024,768).size()))
+        self.dialog.updateGeometry()
+#        self.dialog.show()
         self.userNameField.setText("")
         self.passwordField.setText("")
         self.subjectList = []
