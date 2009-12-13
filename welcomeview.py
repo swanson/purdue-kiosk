@@ -63,6 +63,7 @@ class WelcomeView(object):
         self.exit = QtGui.QPushButton(self.widget)
         self.exit.setGeometry(QtCore.QRect(20,710, 60, 30))
         self.exit.setText("exit")
+        #self.exit.setVisible(False)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

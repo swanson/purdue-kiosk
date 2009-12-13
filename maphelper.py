@@ -4,6 +4,9 @@ import sys, os
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+#This module allows users to view an interactive campus map
+#through a Google Maps window
+
 class MapHelper():
     def __init__(self, dialog, form):
         self.dialog = dialog

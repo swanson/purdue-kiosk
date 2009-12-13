@@ -3,6 +3,10 @@ from BeautifulSoup import BeautifulSoup
 import sys
 from PyQt4 import *
 
+#This module allows users to view Purdue football scores for the whole season
+#as well as the teams record after each games and the start times and dates
+#for future games
+
 class SportsHelper():
 
     def __init__(self, dialog, form):

@@ -5,6 +5,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import urllib
 
+#This module allows users to view computer lab availability for all ITaP
+#labs on campus, sorted by operating system (XP, Mac OS X, Solaris)
 
 class LabHelper():
     def __init__(self, dialog, form):

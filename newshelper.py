@@ -4,6 +4,10 @@ import sys, re, string
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+#This module is responsible for displaying Purdue Campus news stories that
+#are available through FeedBurner RSS feeds
+
+
 class NewsHelper():
 
     def __init__(self, dialog, form):

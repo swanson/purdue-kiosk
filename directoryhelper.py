@@ -4,6 +4,9 @@ import sys, string
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+#This module allows the user to search for students and faculty using the Purdue
+#LDAP (Lightweight Directory Access Protocol) directory
+
 class DirectoryHelper():
 
     def __init__(self, dialog, form):

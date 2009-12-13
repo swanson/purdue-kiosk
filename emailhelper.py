@@ -4,8 +4,10 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from hid import *
 
-class EmailHelper():
+#This module is responsible for allowing students to read messages in their
+#Purdue email inbox.
 
+class EmailHelper():
     def __init__(self, dialog, form):
         self.dialog = dialog
         self.form = form

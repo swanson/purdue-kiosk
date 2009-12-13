@@ -1,18 +1,12 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'directorywindow.ui'
-#
-# Created: Tue Sep  8 13:53:55 2009
-#      by: PyQt4 UI code generator 4.3.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtWebKit import *
 from newshelper import *
 import os
 from flickcharm import *
 from CustomListBox import *
+
+#This module is responsible for displaying Purdue Campus news stories that
+#are available through FeedBurner RSS feeds
 
 class NewsView(object):
     def setupUi(self, Dialog):

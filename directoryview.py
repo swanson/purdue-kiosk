@@ -1,17 +1,12 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'directorywindow.ui'
-#
-# Created: Tue Sep  8 13:53:55 2009
-#      by: PyQt4 UI code generator 4.3.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from directoryhelper import *
 import os
 from CustomListBox import *
 from directorylisting import *
+
+#This module allows the user to search for students and faculty using the Purdue
+#LDAP (Lightweight Directory Access Protocol) directory
+
 
 class DirectoryView(object):
     def setupUi(self, Dialog):

@@ -1,16 +1,11 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'sportsview.ui'
-#
-# Created: Tue Sep  8 19:38:25 2009
-#      by: PyQt4 UI code generator 4.3.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from sportshelper import *
 from scoreboard import *
 import os
+
+#This module allows users to view Purdue football scores for the whole season
+#as well as the teams record after each games and the start times and dates
+#for future games
 
 class SportsView(object):
     def setupUi(self, Dialog):

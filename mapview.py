@@ -1,17 +1,11 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'directorywindow.ui'
-#
-# Created: Tue Sep  8 13:53:55 2009
-#      by: PyQt4 UI code generator 4.3.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtWebKit import *
 from maphelper import *
 import os
 from CustomListBox import *
+
+#This module allows users to view an interactive campus map
+#through a Google Maps window
 
 class MapView(object):
     def setupUi(self, Dialog):

@@ -1,17 +1,11 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'directorywindow.ui'
-#
-# Created: Tue Sep  8 13:53:55 2009
-#      by: PyQt4 UI code generator 4.3.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from labhelper import *
 from lablisting import *
 import os
+
+#This module allows users to view computer lab availability for all ITaP
+#labs on campus, sorted by operating system (XP, Mac OS X, Solaris)
 
 class LabView(object):
     def setupUi(self, Dialog):
