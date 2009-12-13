@@ -1,0 +1,239 @@
+  2009-12-12 matt <matt@matt-desktop.(none)>
+
+ * mouse_hid.py, occ_test.py, startup_piko.sh: more annotations
+
+ * directoryhelper.py, directoryview.py, emailhelper.py, emailview.py,
+ labhelper.py, labview.py, maphelper.py, mapview.py, newshelper.py,
+ newsview.py, sportshelper.py, sportsview.py, welcomeview.py: adding
+ annotations
+
+  2009-12-10 piko <piko@piko.(none)>
+
+ * main.py: removed finger
+
+  2009-12-08 piko <piko@piko.(none)>
+
+ * emailhelper.py, occ_test.py, startup_piko.sh: updated endpoint and
+ interface numbers
+
+ * emailhelper.py, occ_test.py, startup_piko.sh: composite usb device working
+
+  2009-12-08 ece477 <ece477@dsl83.ecn.purdue.edu>
+
+ * emailhelper.py: added PUID
+
+  2009-12-08 matt <matt@matt-desktop.(none)>
+
+ * emailhelper.py, emailview.py: fixing bug where emails and info would
+ persist after closing page, fixed problem with USBListener not restarting
+ properly
+
+  2009-12-07 piko <piko@piko.(none)>
+
+ * emailhelper.py: adding card reader stuff
+
+  2009-12-03 matt <matt@matt-desktop.(none)>
+
+ * emailhelper.py: adding exception handling and error message popup
+
+  2009-12-02 matt <matt@matt-desktop.(none)>
+
+ * emailhelper.py: adding interface number to listener constructor
+
+ * emailhelper.py, emailview.py: adding groundwork for card reader
+
+  2009-11-20 piko <piko@piko.(none)>
+
+ * occ_test.py, startup_piko.sh: occupancy sensor working\! w00t\! also a piko
+ app startup script
+
+  2009-11-20 pikodev <pikodev@pikodev-vm.(none)>
+
+ * occ_test.py: added rough occupancy sensor daemon
+
+  2009-11-06 matt <matt@matt-desktop.(none)>
+
+ * images/finger.png, main.py: adding fingerlawls
+
+ * welcomeview.py: fixing this thing that was annoying me
+
+ * mapview.py: forgot to uncomment
+
+ * welcomeview.py: adding text to exit button
+
+ * newshelper.py, newsview.py: rescaling news page, changed what was rendered
+ to be prettier
+
+ * images/map_bg.png, maphelper.py, mapview.py: rescaling map page, changing
+ bg
+
+ * .gitignore, images/score.png, scoreboard.py, sportshelper.py,
+ sportsview.py: rescaling sports page and widget
+
+ * images/blank_lab.png, images/mac_logo.png, images/os_text.png,
+ images/sun_logo.png, images/xp_logo.png, lablisting.py, labview.py: rescaling
+ lab page, listing widget
+
+ * directoryhelper.py, directorylisting.py, directoryview.py,
+ images/directorylisting.png: rescaling directory window and listing widget
+
+ * emailview.py, images/home.png, welcomeview.py: resizing email page
+
+ * images/directory.png, images/itap.png, images/mail.png, images/map.png,
+ images/mockup_blank_template.png, images/news.png, images/sports.png,
+ images/welcome.png, main.py, welcomeview.py: resizing welcome screen, adding
+ temp exit button for frameless testing
+
+  2009-11-04 matt <matt@matt-eee.(none)>
+
+ * mouse_hid.py: stuff
+
+  2009-11-04 Jevin Sweval <jevin@manbearpig.(none)>
+
+ * mouse_hid.py: added mouse hid test... sorry for the polution
+
+  2009-11-03 matt <matt@matt-desktop.(none)>
+
+ * scoreboard.py: changing scoreboard to look less ugly
+
+ * main.py, sportshelper.py, sportsview.py, welcomeview.py: maximized and
+ frameless windows proof-of-concept
+
+ * .gitignore, directoryhelper.py, directoryview.py, emailhelper.py,
+ emailview.py, labhelper.py, labview.py, maphelper.py, mapview.py,
+ newshelper.py, newsview.py, sportshelper.py, sportsview.py: adding home
+ button to all pages
+
+ * images/home.png, updatesclistings.py: adding home button
+
+  2009-10-22 matt <matt@matt-desktop.(none)>
+
+ * images/itap.png, labhelper.py, lablisting.py, labview.py, welcomeview.py:
+ lab view finished
+
+  2009-10-22 matt <matt@matt-eee.(none)>
+
+ * labhelper.py, lablisting.py: comp lab almost working
+
+ * urltest.py: getting comp lab parser working
+
+  2009-10-22 matt <matt@matt-desktop.(none)>
+
+ * labhelper.py: adding some more lab stuff, having trouble parsing the site
+
+  2009-10-21 matt <matt@matt-desktop.(none)>
+
+ * images/os_text.png, labhelper.py, lablisting.py, labview.py: more lab stuff
+
+ * maphelper.py: fixing ref error
+
+ * gamescore.py, gamescore2.py, imap_testing.py, mech-test.py: clean up
+
+ * .gitignore, images/blank_lab.png, images/mac_logo.png, images/sun_logo.png,
+ images/xp_logo.png, labhelper.py, labview.py, main.py, welcomeview.py: adding
+ labview foundations
+
+ * directoryhelper.py, maphelper.py: fixing two bugs, 5 of 6 pages done
+
+ * main.py, maphelper.py, mapview.py: google maps view working with javascript
+
+  2009-10-18 matt <matt@matt-desktop.(none)>
+
+ * CustomListBox.py, directoryhelper.py, directorylisting.py,
+ directoryview.py, images/directorylisting.png, main.py: completed directory
+ page, modified customlistbox for transparent BG, adding directory listing
+ custom widget image
+
+  2009-10-08 matt <matt@matt-desktop.(none)>
+
+ * emailhelper.py, emailview.py, newshelper.py, newsview.py, welcomeview.py:
+ added threading to http related pages...much smoother experience
+
+  2009-10-03 matt <matt@matt-desktop.(none)>
+
+ * gradient.png: more clean up
+
+ * directory-128x128.png, directory.pyc, directorywindow.pyc,
+ directorywindow.ui, gamescore.ui, gui_test.pyc, scoreboard.plugin,
+ scoreboard.ui, sportsview.ui, untitled.ui: clean up
+
+ * .gitignore, scoreboard.pyc, sportshelper.pyc, sportsview.pyc: adding ignore
+ rules for pyc and swp files
+
+ * emailhelper.py, emailview.py: added progress bar to email to show download
+ progress, should probably try to thread...
+
+ * CustomListBox.py, emailhelper.py, emailview.py, main.py: adding email page,
+ barebones
+
+ * imap_testing.py: adding imaptesting
+
+ * flickcharm.py, newshelper.py, newsview.py: adding webkit to news page for
+ epic win
+
+  2009-09-26 matt <matt@matt-desktop.(none)>
+
+ * newshelper.py, newsview.py: three tiered news page working for the most
+ part
+
+  2009-09-25 matt <matt@matt-desktop.(none)>
+
+ * CustomListBox.py, mech-test.py, newshelper.py, newsview.py: populating
+ listboxs with headlines like a champ
+
+  2009-09-24 matt <matt@matt-desktop.(none)>
+
+ * newsview.py: doing news listbox layout
+
+  2009-09-23 matt <matt@matt-desktop.(none)>
+
+ * CustomListBox.py: added flicking scrolling to customlistbox
+
+ * CustomListBox.py, newshelper.py: adding super cool listbox
+
+  2009-09-22 matt <matt@matt-desktop.(none)>
+
+ * flickcharm.py, newshelper.py, newsview.py: fancy kinetic scrolling...
+
+ * directoryhelper.py, directoryview.py, main.py, newshelper.py, newsview.py:
+ adding barebones campus news page
+
+ * directory.py, directoryhelper.py, directoryview.py, directorywindow.py,
+ gui_test.py, main.py, mech-test.py, sportshelper.py, sportshelper.pyc,
+ welcomeview.py: renaming some stuff to be more consistent
+
+ * directorywindow.py, directorywindow.pyc, gui_test.py, gui_test.pyc,
+ images/back_arrow.png, images/directory.png, images/forward_arrow.png,
+ images/mail.png, images/map.png, images/mockup_blank_template.png,
+ images/mockup_welcome.png, images/news.png, images/printer.png,
+ images/score.png, images/sports.png, images/sports_mockup.png,
+ images/welcome.png, scoreboard.py, scoreboard.pyc, sportsview.py,
+ sportsview.pyc: adding images, fixing static paths
+
+  2009-09-11 matt <matt@matt-desktop.(none)>
+
+ * sportshelper.py, sportshelper.pyc: added record - minor change
+
+ * gui_test.py, gui_test.pyc, scoreboard.py, scoreboard.pyc, sportshelper.py,
+ sportshelper.pyc, sportsview.py, sportsview.pyc: added buttons and scrolling
+
+ * scoreboard.py, scoreboard.pyc, sportshelper.py, sportshelper.pyc,
+ sportsview.py, sportsview.pyc: sports populate, formatting needs work
+
+ * mech-test.py, scoreboard.py, scoreboard.pyc, sportshelper.py,
+ sportshelper.pyc, sportsview.py, sportsview.pyc: sports parsing up and
+ running...but ugly
+
+ * directory.pyc, directorywindow.pyc, gamescore.py, gamescore.ui,
+ gamescore2.py, gui_test.pyc, scoreboard.plugin, scoreboard.py,
+ scoreboard.pyc, scoreboardplugin.py, sportshelper.py, sportshelper.pyc,
+ sportsview.py, sportsview.pyc: more dumping
+
+  2009-09-08 matt <matt@matt-desktop.(none)>
+
+ * directory-128x128.png, directory.py, directory.pyc, directorywindow.py,
+ directorywindow.pyc, directorywindow.ui, gradient.png, gui_test.py,
+ gui_test.pyc, main.py, mech-test.py, scoreboard.py, scoreboard.pyc,
+ scoreboard.ui, scoreboardplugin.py, sportshelper.py, sportshelper.pyc,
+ sportsview.py, sportsview.pyc, sportsview.ui, untitled.ui: dumping stuff in
+ case of epic sysfail
