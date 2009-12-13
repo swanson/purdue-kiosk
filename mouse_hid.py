@@ -32,14 +32,6 @@ def main():
   if ret != HID_RET_SUCCESS:
     sys.stderr.write("hid_force_open failed with return code %d.\n" % ret)
 
-  #while 1:
-  #  ret, bytes = hid_get_input_report(hid, (0x00010002, 0x00010030), 3)
-  #  if ret != HID_RET_SUCCESS:
-  #    sys.stderr.write("hid_get_input_report failed with return code %d.\n" % ret)
-  #  else:
-  #    for byte in bytes:
-  #      print "%02x" % ord(byte),
-  #    print ""
   while 1:
     ret, bytes = hid_interrupt_read(hid, 0x81, 7, 1000)
     if ret != HID_RET_SUCCESS:
@@ -48,15 +40,7 @@ def main():
       for byte in bytes:
         print "%02x" % ord(byte),
       print ""
-	
 
-#  ret = hid_write_identification(sys.stdout, hid);
-#  if ret != HID_RET_SUCCESS:
-#    sys.stderr.write("hid_write_identification failed with return code %d.\n" % ret)
-
-#  ret = hid_dump_tree(sys.stdout, hid);
-#  if ret != HID_RET_SUCCESS:
-#    sys.stderr.write("hid_dump_tree failed with return code %d.\n" % ret)
 
   ret = hid_close(hid)
   if ret != HID_RET_SUCCESS:
